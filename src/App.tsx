@@ -4,7 +4,7 @@ import "./App.css";
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <h1>Safarni</h1>,
+    element: <h1>Ziad</h1>,
   },
 ]);
 
