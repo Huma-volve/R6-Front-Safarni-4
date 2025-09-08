@@ -1,15 +1,13 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/navbar/NavBar";
 
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <h1 className="text-muted">Ziad</h1>,
-  },
-]);
-
-function App() {
-  return <RouterProvider router={routes} />;
+export default function App() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+    </div>
+  );
 }
-
-export default App;
-
