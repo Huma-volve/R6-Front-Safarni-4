@@ -5,7 +5,7 @@ import FavoritePage from "./pages/favorite/FavoritePage";
 import ComparePage from "./pages/ComparePage";
 import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
-import ProfileInfo from "./components/profile/ProfileInfo";
+import InfoPage from "./pages/profile/InfoPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,10 +20,19 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <ProfilePage />,
         children: [
-          { path: "info", element: <ProfileInfo /> },
-          { path: "my-booking", element: <h1 className="text-2xl font-semibold">My Booking</h1> },
-          { path: "language", element: <h1 className="text-2xl font-semibold">Language</h1> },
-          { path: "account", element: <h1 className="text-2xl font-semibold">Account</h1> },
+          { path: "info", element: <InfoPage /> },
+          {
+            path: "my-booking",
+            element: <h1 className="text-2xl font-semibold">My Booking</h1>,
+          },
+          {
+            path: "language",
+            element: <h1 className="text-2xl font-semibold">Language</h1>,
+          },
+          {
+            path: "account",
+            element: <h1 className="text-2xl font-semibold">Account</h1>,
+          },
         ],
       },
     ],
