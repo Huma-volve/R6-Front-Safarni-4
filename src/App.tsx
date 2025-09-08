@@ -1,11 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
-import Login from "./components/auth/Login";
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <h1>Ziad</h1>,
+    element: <h1 className="text-muted">Ziad</h1>,
   },
 ]);
 
@@ -14,3 +12,4 @@ function App() {
 }
 
 export default App;
+
