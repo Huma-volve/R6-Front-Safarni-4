@@ -52,17 +52,25 @@ export default function NavBar() {
 
         {/* Icons + Mobile Menu */}
         <div className="flex items-center gap-4">
-          <button>
-            <Search className="w-5 h-5 text-gray-600 hover:text-primary" />
-          </button>
-          <button>
-            <SlidersHorizontal className="w-5 h-5 text-gray-600 hover:text-primary" />
-          </button>
-          <img
-            src="/avatar.jpg"
-            alt="user"
-            className="w-8 h-8 rounded-full border"
-          />
+          <NavLink to="/search">
+            <button>
+              <Search className="w-5 h-5 text-gray-600 hover:text-primary" />
+            </button>
+          </NavLink>
+
+          <NavLink to="/filter">
+            <button>
+              <SlidersHorizontal className="w-5 h-5 text-gray-600 hover:text-primary" />
+            </button>
+          </NavLink>
+
+          <NavLink to="/profile">
+            <img
+              src="/avatar.jpg"
+              alt="user"
+              className="w-8 h-8 rounded-full border"
+            />
+          </NavLink>
 
           {/* Mobile Drawer */}
           <Sheet>
