@@ -5,7 +5,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
-      <main className="flex-1">
+      <main className="flex-1 p-6 w-full max-w-[1240px] mx-auto">
         <Outlet />
       </main>
     </div>
