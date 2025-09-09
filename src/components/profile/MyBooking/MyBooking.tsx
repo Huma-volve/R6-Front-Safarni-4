@@ -15,7 +15,7 @@ export default function MyBooking() {
       <BackButton router="/profile" />
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-medium text-center">My Booking</h1>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full my-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {tabs.map((tab) => (
             <NavLink
               key={tab.name}

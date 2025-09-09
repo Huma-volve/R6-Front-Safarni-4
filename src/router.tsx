@@ -9,6 +9,7 @@ import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
 import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
+import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
                 element: <Navigate to="flights" replace />,
               },
               { path: "flights", element: <FlightBookingPage /> },
-              { path: "cars", element: <h1>Cars</h1> },
+              { path: "cars", element: <CarsBookingPage /> },
               { path: "tours", element: <h1>Tours</h1> },
               { path: "hotels", element: <h1>Hotels</h1> },
             ],

@@ -1,7 +1,8 @@
 import Flights from "@/components/profile/MyBooking/Flights";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-import type { BookingFlight, Flight } from "@/Types/BookingFlight";
+import type { BookingFlight, Flight } from "@/Types/Booking";
+import toast from "react-hot-toast";
 
 export default function FlightBookingPage() {
   const [bookingFlights, setBookingFlights] = useState<BookingFlight[]>([]);
@@ -23,6 +24,7 @@ export default function FlightBookingPage() {
       });
 
       if (response.status === 200) {
+        toast.success("Booking flights fetched successfully");
         const ids = response.data.data.map(
           (booking: BookingFlight) => booking.flight_id
         );
@@ -32,6 +34,7 @@ export default function FlightBookingPage() {
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to fetch booking flights");
       setLoading(false);
     }
   }, [BASE_URL, token]);

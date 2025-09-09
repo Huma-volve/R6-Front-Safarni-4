@@ -1,7 +1,7 @@
 import { Loader2, Plane, Timer } from "lucide-react";
 import { Card, CardContent } from "../../ui/card";
 import BorderedContainer from "./../../common/BorderedContainer";
-import type { BookingFlight, Flight } from "../../../Types/BookingFlight";
+import type { BookingFlight, Flight } from "../../../Types/Booking";
 
 type FlightsProps = {
   flights: Flight[];
@@ -52,7 +52,7 @@ export default function Flights({
           const arr = new Date(flight.arrival_time);
 
           return (
-            <BorderedContainer key={flight.id} className="mb-6">
+            <BorderedContainer key={flight.id} className="my-6">
               <Card>
                 <CardContent className="flex flex-col p-0 text-sm md:text-base">
                   <div className="flex items-center justify-between">
