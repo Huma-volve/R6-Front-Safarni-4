@@ -14,7 +14,7 @@ type ProfileInfoType = {
 };
 
 export default function ProfileInfoPage() {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -26,11 +26,11 @@ export default function ProfileInfoPage() {
   });
 
   const handleSubmit = async (values: ProfileInfoType) => {
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
     try {
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
       const response = await axios.post(`${BASE_URL}profile`, values, {
         headers: {
-          Authorization: `Bearer 35|8MTAhKb3ZWaVuD4lVpsxqGjrIcmobQ1ruzJlSJOcb49f2e51`,
+          Authorization: `Bearer 40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82`,
         },
       });
       console.log(values);

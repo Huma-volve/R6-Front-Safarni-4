@@ -25,12 +25,12 @@ export default function ProfileLinks() {
         <Card className="flex flex-col gap-3">
           {links.map((link) => (
             <Link key={link.name} to={link.href}>
-              <Card>
+              <Card className="md:px-4">
                 <CardContent className="px-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4 text-muted">
                       {link.icon}
-                      <span className="text-md md:text-lg text-black font-semibold">
+                      <span className="text-md md:text-lg text-black font-medium">
                         {link.name}
                       </span>
                     </div>
@@ -41,12 +41,12 @@ export default function ProfileLinks() {
             </Link>
           ))}
           <Link key={"logout"} to={"/logout"}>
-            <Card>
+            <Card className="md:px-4">
               <CardContent className="px-0">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-red-600">
                     <LogOut className="rotate-180 w-5 h-5" />
-                    <span className="text-md md:text-lg text-red-600 font-semibold">
+                    <span className="text-md md:text-lg text-red-600 font-medium">
                       Logout
                     </span>
                   </div>
