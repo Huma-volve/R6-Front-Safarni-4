@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function ProfileContainer({
+function BorderedContainer({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -18,4 +18,4 @@ function ProfileContainer({
   );
 }
 
-export default ProfileContainer;
+export default BorderedContainer;

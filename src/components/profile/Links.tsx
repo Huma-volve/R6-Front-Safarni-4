@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { Lock } from "lucide-react";
 import { ChevronRight } from "lucide-react";
-import ProfileContainer from "../common/ProfileContainer";
+import BorderedContainer from "../common/BorderedContainer";
 
 const links = [
   { name: "Personal Info", icon: <UserRound />, href: "/profile/info" },
@@ -21,7 +21,7 @@ const links = [
 export default function ProfileLinks() {
   return (
     <>
-      <ProfileContainer>
+      <BorderedContainer>
         <Card className="flex flex-col gap-3">
           {links.map((link) => (
             <Link key={link.name} to={link.href}>
@@ -55,7 +55,7 @@ export default function ProfileLinks() {
             </Card>
           </Link>
         </Card>
-      </ProfileContainer>
+      </BorderedContainer>
     </>
   );
 }

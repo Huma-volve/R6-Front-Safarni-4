@@ -2,7 +2,7 @@ import { Card } from "../ui/card";
 import type { User } from "../../Types/User";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Camera, Loader2 } from "lucide-react";
-import ProfileContainer from "../common/ProfileContainer";
+import BorderedContainer from "../common/BorderedContainer";
 import { Input } from "../ui/input";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
@@ -21,7 +21,7 @@ export default function UserInfo({
   const { Userloading } = useContext(UserContext);
 
   return (
-    <ProfileContainer>
+    <BorderedContainer>
       <Card className="flex items-center gap-6 md:py-4">
         {loading || Userloading ? (
           <div className="flex items-center justify-center w-full h-full">
@@ -77,6 +77,6 @@ export default function UserInfo({
           </>
         )}
       </Card>
-    </ProfileContainer>
+    </BorderedContainer>
   );
 }
