@@ -30,7 +30,7 @@ export default function ProfileInfoPage() {
     try {
       const response = await axios.post(`${BASE_URL}profile`, values, {
         headers: {
-          Authorization: `Bearer 23|Sr6D5qpESAa1HvTRIWVKSoc6OE4IQUbBgNDkIv522eaf9082`,
+          Authorization: `Bearer 35|8MTAhKb3ZWaVuD4lVpsxqGjrIcmobQ1ruzJlSJOcb49f2e51`,
         },
       });
       console.log(values);

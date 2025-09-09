@@ -6,6 +6,7 @@ import ComparePage from "./pages/ComparePage";
 import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
+import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ export const router = createBrowserRouter([
             element: <h1 className="text-2xl font-semibold">Language</h1>,
           },
           {
-            path: "account",
-            element: <h1 className="text-2xl font-semibold">Account</h1>,
+            path: "account-security",
+            element: <AccountSecurityPage />,
           },
         ],
       },

@@ -14,7 +14,7 @@ const links = [
   {
     name: "Account & Security",
     icon: <Lock />,
-    href: "/profile/account",
+    href: "/profile/account-security",
   },
 ];
 

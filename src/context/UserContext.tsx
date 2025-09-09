@@ -12,7 +12,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await axios.get(`${BASE_URL}profile`, {
         headers: {
-          Authorization: `Bearer 23|Sr6D5qpESAa1HvTRIWVKSoc6OE4IQUbBgNDkIv522eaf9082`,
+          Authorization: `Bearer 35|8MTAhKb3ZWaVuD4lVpsxqGjrIcmobQ1ruzJlSJOcb49f2e51`,
         },
       });
       const data = response.data.data.user;
