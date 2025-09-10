@@ -19,8 +19,8 @@ const links = [
 
 export default function NavBar() {
   return (
-    <header className="bg-white shadow-sm">
-      <div className="max-w-[1240px] mx-auto px-6 py-3 flex items-center justify-between">
+    <header className="bg-white shadow-sm ">
+      <div className="max-w-[1240px] mx-auto px-6 py-3 flex items-center justify-between h-20">
         {/* Logo */}
         <div className="flex flex-col items-center gap-2">
           <img src="/src/assets/Logo.png" alt="logo" className="w-8 h-8" />
