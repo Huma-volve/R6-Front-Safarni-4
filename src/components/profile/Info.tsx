@@ -1,4 +1,4 @@
-import ProfileContainer from "../common/ProfileContainer";
+import BorderedContainer from "../common/BorderedContainer";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
@@ -54,8 +54,8 @@ export default function ProfileInfo({ formik }: ProfileInfoProps) {
 
   return (
     <>
-      <BackButton />
-      <ProfileContainer>
+      <BackButton router="/profile" />
+      <BorderedContainer>
         <Card>
           {Userloading ? (
             <div className="flex items-center justify-center w-full h-full">
@@ -124,7 +124,7 @@ export default function ProfileInfo({ formik }: ProfileInfoProps) {
             </>
           )}
         </Card>
-      </ProfileContainer>
+      </BorderedContainer>
     </>
   );
 }

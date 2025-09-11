@@ -1,4 +1,4 @@
-import ProfileContainer from "../common/ProfileContainer";
+import BorderedContainer from "../common/BorderedContainer";
 import { Card, CardContent } from "../ui/card";
 import BackButton from "../common/BackButton";
 import { CardTitle } from "../ui/card";
@@ -47,8 +47,8 @@ export default function AccountSecurity({
 }) {
   return (
     <>
-      <BackButton />
-      <ProfileContainer>
+      <BackButton router="/profile" />
+      <BorderedContainer>
         <Card className="flex flex-col gap-3">
           <CardTitle className="text-center text-xl">
             Account & Security
@@ -129,7 +129,7 @@ export default function AccountSecurity({
             </div>
           </CardContent>
         </Card>
-      </ProfileContainer>
+      </BorderedContainer>
     </>
   );
 }

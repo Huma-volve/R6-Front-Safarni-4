@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import HomePage from "./pages/home/HomePage";
 import FavoritePage from "./pages/favorite/FavoritePage";
@@ -7,13 +7,18 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
+import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
+import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
+import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
+import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
+import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
 import GetStart from "./components/auth/GetStart";
 import Login from "./components/auth/Login";
-import SignUp from "./components/auth/SignUp";
+import SignUp from "./components/auth/Signup";
 import FPassword from "./components/auth/FPassword";
 import Otp from "./components/auth/Otp";
-import NPassword from "./components/auth/Npassword";
-import Done from "./components/auth/done";
+import NPassword from "./components/auth/NPassword";
+import Done from "./components/auth/Done";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +36,14 @@ export const router = createBrowserRouter([
           { path: "info", element: <InfoPage /> },
           {
             path: "my-booking",
-            element: <h1 className="text-2xl font-semibold">My Booking</h1>,
+            element: <MyBookingPage />,
+            children: [
+              { index: true, element: <Navigate to="flights" replace /> },
+              { path: "flights", element: <FlightBookingPage /> },
+              { path: "cars", element: <CarsBookingPage /> },
+              { path: "tours", element: <ToursBookingPage /> },
+              { path: "hotels", element: <HotelBookingPage /> },
+            ],
           },
           {
             path: "language",
@@ -42,10 +54,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/GetStart",
-    element: <GetStart />,
-  },
+  { path: "/GetStart", element: <GetStart /> },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   { path: "/FPassword", element: <FPassword /> },
