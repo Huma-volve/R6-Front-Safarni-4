@@ -12,6 +12,13 @@ import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
 import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
 import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
 import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
+import GetStart from "./components/auth/GetStart";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
+import FPassword from "./components/auth/FPassword";
+import Otp from "./components/auth/Otp";
+import NPassword from "./components/auth/Npassword";
+import Done from "./components/auth/done";
 
 export const router = createBrowserRouter([
   {
@@ -45,12 +52,19 @@ export const router = createBrowserRouter([
             path: "language",
             element: <h1 className="text-2xl font-semibold">Language</h1>,
           },
-          {
-            path: "account-security",
-            element: <AccountSecurityPage />,
-          },
+          { path: "account-security", element: <AccountSecurityPage /> },
         ],
       },
     ],
   },
+  {
+    path: "/GetStart",
+    element: <GetStart />,
+  },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <SignUp /> },
+  { path: "/FPassword", element: <FPassword /> },
+  { path: "/Otp", element: <Otp /> },
+  { path: "/NPassword", element: <NPassword /> },
+  { path: "/Done", element: <Done /> },
 ]);
