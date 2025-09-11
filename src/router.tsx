@@ -14,11 +14,11 @@ import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
 import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
 import GetStart from "./components/auth/GetStart";
 import Login from "./components/auth/Login";
-import SignUp from "./components/auth/SignUp";
+import SignUp from "./components/auth/Signup";
 import FPassword from "./components/auth/FPassword";
 import Otp from "./components/auth/Otp";
-import NPassword from "./components/auth/Npassword";
-import Done from "./components/auth/done";
+import NPassword from "./components/auth/NPassword";
+import Done from "./components/auth/Done";
 
 export const router = createBrowserRouter([
   {

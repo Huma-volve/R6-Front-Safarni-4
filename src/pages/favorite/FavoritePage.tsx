@@ -13,10 +13,10 @@ function FavoritePage() {
     try {
       setLoading(true);
       const BASE_URL = import.meta.env.VITE_BASE_URL;
-      // const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
       const response = await axios.get(`${BASE_URL}favorites`, {
         headers: {
-          Authorization: `Bearer 40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 200) {
