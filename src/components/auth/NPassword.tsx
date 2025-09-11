@@ -11,9 +11,9 @@ export default function NPassword() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full flex items-start justify-between px-6 md:px-20 pt-4 ">
+      <header className="w-full hidden md:flex items-start justify-between px-6 md:px-20 pt-4">
         <div className="mt-3">
-          <BackButton />
+          <BackButton router={-1} />
         </div>
 
         <div className="flex flex-col items-end mr-5">
@@ -27,8 +27,9 @@ export default function NPassword() {
           </span>
         </div>
       </header>
+
       <div className="flex flex-col md:flex-row flex-1 px-4 sm:px-6 md:px-16 py-6 md:py-5 md:pt-0 gap-6 md:gap-10">
-        <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl p-4 md:p-2">
+        <div className="hidden md:flex flex-1 items-center justify-center bg-gray-100 rounded-2xl p-4 md:p-2">
           <img
             src="/src/assets/FPassword.png"
             alt="illustration"
@@ -37,13 +38,13 @@ export default function NPassword() {
         </div>
 
         <div className="flex-1 flex items-center justify-center">
-          <div className="bg-white rounded-xl w-full max-w-md md:p-2">
-            <div className="flex flex-col items-center mb-4">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3 ">
+          <div className="bg-white rounded-xl w-full max-w-md md:p-2 p-6">
+            <div className="flex flex-col items-center mb-4 px-2">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3">
                 <FiLock className="text-gray-400 w-6 h-6" />
               </div>
 
-              <h1 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900 text-center">
+              <h1 className="text-xl sm:text-2xl font-semibold mb-2 text-gray-900 text-center">
                 Set New Password
               </h1>
 
@@ -53,9 +54,9 @@ export default function NPassword() {
               </p>
             </div>
 
-            <form className="flex flex-col gap-5">
+            <form className="flex flex-col gap-4">
               <div className="w-full">
-                <label className="text-black font-medium mb-2 block text-sm">
+                <label className="text-black font-medium mb-1 block text-sm">
                   Password
                 </label>
                 <div className="relative">
@@ -81,7 +82,7 @@ export default function NPassword() {
               </div>
 
               <div className="w-full">
-                <label className="text-black font-medium mb-2 block text-sm">
+                <label className="text-black font-medium mb-1 block text-sm">
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -119,7 +120,7 @@ export default function NPassword() {
 
               <Button
                 type="submit"
-                className="w-full py-3  text-base font-semibold cursor-pointer"
+                className="w-full py-3 text-base font-semibold cursor-pointer"
               >
                 Reset Password
               </Button>
