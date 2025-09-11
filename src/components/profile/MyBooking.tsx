@@ -1,4 +1,4 @@
-import BackButton from "../../common/BackButton";
+import BackButton from "../common/BackButton";
 import { NavLink, Outlet } from "react-router-dom";
 import { Plane, Car, BedSingle, Ship } from "lucide-react";
 

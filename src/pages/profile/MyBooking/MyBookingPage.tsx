@@ -1,4 +1,4 @@
-import MyBooking from "@/components/profile/MyBooking/MyBooking";
+import MyBooking from "@/components/profile/MyBooking";
 
 export default function MyBookingPage() {
   return (
