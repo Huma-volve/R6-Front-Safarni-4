@@ -10,6 +10,8 @@ import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
 import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
 import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
+import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
+import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,8 +37,8 @@ export const router = createBrowserRouter([
               },
               { path: "flights", element: <FlightBookingPage /> },
               { path: "cars", element: <CarsBookingPage /> },
-              { path: "tours", element: <h1>Tours</h1> },
-              { path: "hotels", element: <h1>Hotels</h1> },
+              { path: "tours", element: <ToursBookingPage /> },
+              { path: "hotels", element: <HotelBookingPage /> },
             ],
           },
           {

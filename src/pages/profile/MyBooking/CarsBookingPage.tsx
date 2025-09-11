@@ -1,6 +1,6 @@
 import Cars from "@/components/profile/MyBooking/Cars";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import type { BookingCar } from "@/Types/Booking";
 
@@ -11,7 +11,7 @@ export default function CarsBookingPage() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const token = "40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82";
 
-  const handleGetBookingCars = async () => {
+  const handleGetBookingCars = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${BASE_URL}bookings/my`, {
@@ -27,11 +27,11 @@ export default function CarsBookingPage() {
       console.error(error);
       setLoading(false);
     }
-  };
+  }, [BASE_URL, token]);
 
   useEffect(() => {
     handleGetBookingCars();
-  }, []);
+  }, [handleGetBookingCars]);
   return (
     <>
       <Cars bookingCars={bookingCars} loading={loading} />

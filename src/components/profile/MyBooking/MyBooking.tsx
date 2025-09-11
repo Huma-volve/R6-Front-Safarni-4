@@ -12,7 +12,7 @@ const tabs = [
 export default function MyBooking() {
   return (
     <>
-      <BackButton router="/profile" />
+      <BackButton router={-1} />
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-medium text-center">My Booking</h1>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
