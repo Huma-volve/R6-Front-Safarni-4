@@ -76,9 +76,9 @@ export default function Otp() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full flex items-start justify-between px-6 md:px-20 pt-4 ">
+      <header className="w-full hidden md:flex items-start justify-between px-6 md:px-20 pt-4">
         <div className="mt-3">
-          <BackButton />
+          <BackButton router={-1} />
         </div>
         <div className="flex flex-col items-end mr-5">
           <Link to="/GetStart" className="flex flex-col items-center">
@@ -95,7 +95,7 @@ export default function Otp() {
       </header>
 
       <div className="flex flex-col md:flex-row flex-1 px-6 md:px-16 pb-10 gap-8">
-        <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl p-3 m-3 md:m-0 md:p-3">
+        <div className="flex-1 hidden md:flex items-center justify-center bg-gray-100 rounded-2xl p-3 md:p-3">
           <img
             src="/src/assets/login.png"
             alt="illustration"
@@ -155,7 +155,7 @@ export default function Otp() {
             onClick={handleVerify}
             className="w-full max-w-sm py-3 text-base font-semibold cursor-pointer bg-blue-800 hover:bg-blue-900"
           >
-            {loading ? "Verifying..." : "Verify"}
+            {loading ? "Verifying" : "Verify"}
           </Button>
         </div>
       </div>

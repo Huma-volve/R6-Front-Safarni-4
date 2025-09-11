@@ -38,10 +38,7 @@ export const router = createBrowserRouter([
             path: "my-booking",
             element: <MyBookingPage />,
             children: [
-              {
-                index: true,
-                element: <Navigate to="flights" replace />,
-              },
+              { index: true, element: <Navigate to="flights" replace /> },
               { path: "flights", element: <FlightBookingPage /> },
               { path: "cars", element: <CarsBookingPage /> },
               { path: "tours", element: <ToursBookingPage /> },
@@ -57,10 +54,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/GetStart",
-    element: <GetStart />,
-  },
+  { path: "/GetStart", element: <GetStart /> },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   { path: "/FPassword", element: <FPassword /> },

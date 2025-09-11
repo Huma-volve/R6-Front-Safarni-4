@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FiMail } from "react-icons/fi";
+import { FiMail, FiKey } from "react-icons/fi";
 import BackButton from "../common/BackButton";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -51,9 +51,9 @@ export default function FPassword() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full flex items-start justify-between px-6 md:px-20 pt-4 ">
+      <header className="w-full hidden md:flex items-start justify-between px-6 md:px-20 pt-4">
         <div className="mt-3">
-          <BackButton />
+          <BackButton router={-1} />
         </div>
 
         <div className="flex flex-col items-end mr-5">
@@ -71,7 +71,7 @@ export default function FPassword() {
       </header>
 
       <div className="flex flex-col md:flex-row flex-1 px-6 md:px-16 pb-10 gap-8">
-        <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl p-3 m-3 md:m-0 md:p-3">
+        <div className="flex-1 hidden md:flex items-center justify-center bg-gray-100 rounded-2xl p-3 md:p-3">
           <img
             src="/src/assets/FPassword.png"
             alt="illustration"
@@ -81,6 +81,8 @@ export default function FPassword() {
 
         <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 md:px-8">
           <div className="flex flex-col items-center justify-center text-center max-w-xl w-full mx-auto space-y-4">
+            <FiKey className="text-4xl text-gray-400 mb-10" />
+
             <h1 className="text-2xl sm:text-2xl md:text-2xl text-black font-semibold">
               Forgot Password?
             </h1>

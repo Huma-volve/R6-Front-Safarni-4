@@ -61,11 +61,18 @@ export default function Login() {
         },
         body: JSON.stringify(formData),
       });
+
       if (!res.ok) {
         throw new Error("Login failed");
       }
+
       const data = await res.json();
       console.log("Login successfully:", data);
+
+      if (data?.data?.token) {
+        localStorage.setItem("token", data.data.token);
+      }
+
       navigate("/");
     } catch (err: any) {
       console.error(err);
@@ -74,20 +81,55 @@ export default function Login() {
       setLoading(false);
     }
   };
+  const Loader = () => (
+    <svg
+      className="animate-spin h-5 w-5 text-white"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      ></path>
+    </svg>
+  );
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full flex items-start justify-between px-4 sm:px-6 md:px-20 pt-4">
+      <div className="flex justify-center mt-13 md:hidden">
+        <Link to="/GetStart" className="flex flex-col items-center">
+          <img
+            src="/src/assets/Logo.png"
+            alt="Safarni logo"
+            className="w-16 h-16 sm:w-20 sm:h-20"
+          />
+          <span className="mt-2 font-bold text-lg sm:text-xl text-primary">
+            Safarni
+          </span>
+        </Link>
+      </div>
+
+      <header className="w-full hidden md:flex items-start justify-between px-4 sm:px-6 md:px-20 pt-4">
         <div className="mt-3">
-          <BackButton />
+          <BackButton router={-1} />
         </div>
 
-        <div className="flex flex-col items-end mr-2 sm:mr-5">
+        <div className="flex flex-col items-end mr-2 sm:mr-5 ">
           <Link to="/GetStart" className="flex flex-col items-center">
             <img
               src="/src/assets/Logo.png"
               alt="Safarni logo"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-12 md:h-12"
             />
             <span className="mt-1 font-bold text-xs sm:text-sm md:text-base text-primary">
               Safarni
@@ -97,20 +139,19 @@ export default function Login() {
       </header>
 
       <div className="flex flex-col md:flex-row flex-1 px-4 sm:px-6 md:px-16 pb-10 gap-8">
-        <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl p-3 m-3 md:m-0 md:p-3">
+        <div className="flex-1 hidden md:flex items-center justify-center bg-gray-100 rounded-2xl p-3">
           <img
             src="/src/assets/login.png"
             alt="illustration"
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md rounded-2xl"
+            className="w-full h-auto max-w-md rounded-2xl"
           />
         </div>
 
         <div className="flex-1 flex flex-col justify-center px-2 sm:px-4 md:px-8">
-          <div className="flex flex-col items-center text-center w-full mx-auto">
+          <div className="flex flex-col items-center text-center w-full mx-auto -mt-6 md:mt-0">
             <h1 className="text-lg sm:text-xl md:text-2xl text-black mb-2 font-semibold">
               Welcome Again
             </h1>
-
             <p className="text-gray-600 mb-4 text-sm sm:text-base md:text-lg leading-relaxed">
               welcome back! please fill your Data
             </p>
@@ -180,17 +221,17 @@ export default function Login() {
               </div>
 
               {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-
               <Button
                 type="submit"
                 variant="default"
-                className="w-full py-3 text-base font-semibold cursor-pointer"
+                className="w-full py-3 text-base font-semibold flex items-center justify-center gap-2"
                 disabled={loading}
               >
-                {loading ? "Logging in..." : "Log In"}
+                {loading && <Loader />}
+                {loading ? "Logging in" : "Log In"}
               </Button>
 
-              <div className="w-full max-w-md mx-auto mt-3">
+              <div className="w-full max-w-md mx-auto mt-3 hidden md:block">
                 <div className="relative flex items-center justify-center mb-4">
                   <div className="border-t border-gray-300 w-full"></div>
                   <span className="px-3 text-gray-500 text-xs sm:text-sm bg-white">
@@ -200,10 +241,7 @@ export default function Login() {
                 </div>
 
                 <div className="flex gap-3 mb-4">
-                  <button
-                    type="button"
-                    className="flex-1 flex items-center justify-center py-2 sm:py-3 px-3 border border-blue-800 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                  >
+                  <button className="flex-1 flex items-center justify-center py-2 sm:py-3 px-3 border border-blue-800 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       {" "}
                       <path
@@ -228,23 +266,22 @@ export default function Login() {
                   <button className="flex-1 flex items-center justify-center py-2 sm:py-3 px-3 border border-blue-800 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                     <FaFacebook className="w-5 h-5 text-blue-600" />
                   </button>
-
                   <button className="flex-1 flex items-center justify-center py-2 sm:py-3 px-3 border border-blue-800 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                     <FaApple className="w-5 h-5 text-black" />
                   </button>
                 </div>
+              </div>
 
-                <div className="text-center">
-                  <span className="text-gray-600 font-semibold text-sm sm:text-base">
-                    Don't have an account?{" "}
-                  </span>
-                  <Link
-                    to="/SignUp"
-                    className="text-blue-800 font-bold font-serif text-sm sm:text-md hover:underline"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
+              <div className="text-center mt-2">
+                <span className="text-gray-600 font-semibold text-sm sm:text-base">
+                  Don't have an account?{" "}
+                </span>
+                <Link
+                  to="/SignUp"
+                  className="text-blue-800 font-bold font-serif text-sm sm:text-md hover:underline"
+                >
+                  Sign Up
+                </Link>
               </div>
             </form>
           </div>

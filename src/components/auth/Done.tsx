@@ -1,11 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function Done() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/login");
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="w-full px-6 md:px-20 pt-4 ">
+      <header className="w-full hidden md:flex items-end justify-end px-6 md:px-20 pt-4">
         <div className="flex flex-col items-end mr-5">
           <img
             src="/src/assets/Logo.png"
@@ -19,7 +30,7 @@ export default function Done() {
       </header>
 
       <div className="flex flex-col md:flex-row flex-1 px-6 md:px-16 pb-10 md:pb-10 gap-6 md:gap-7">
-        <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-2xl p-2 h-full">
+        <div className="flex-1 hidden md:flex items-center justify-center bg-gray-100 rounded-2xl p-2 h-full">
           <img
             src="/src/assets/Done.png"
             alt="illustration"
@@ -48,22 +59,23 @@ export default function Done() {
           </div>
 
           <h1 className="text-2xl font-semibold text-gray-900 mb-3">
-            password reset
+            Password Reset
           </h1>
 
           <p className="text-gray-600 mb-5 max-w-md leading-relaxed">
-            your password has been successfully reset
+            Your password has been successfully reset.
             <br />
-            click below to log in magically.
+            Click below to log in magically.
           </p>
 
           <Button
-            type="submit"
+            type="button"
             variant="default"
-            onClick={() => navigate("/login")}
-            className="w-md py-5 text-base font-semibold cursor-pointer"
+            onClick={handleLogin}
+            className="w-full py-3 text-base font-semibold flex items-center justify-center gap-2 cursor-pointer"
+            disabled={loading}
           >
-            Log In
+            {loading ? "Logging in" : "Log In"}
           </Button>
         </div>
       </div>
