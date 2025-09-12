@@ -2,7 +2,6 @@ import type { BookingCar } from "@/Types/Booking";
 import BorderedContainer from "@/components/common/BorderedContainer";
 import { Loader2 } from "lucide-react";
 import { Card, CardContent } from "../../ui/card";
-import Car from "../../../assets/Cars.avif";
 
 type CarsProps = {
   bookingCars: BookingCar[];
@@ -31,9 +30,9 @@ export default function Cars({ bookingCars, loading }: CarsProps) {
                   <p className="border-l-2 px-2">{car.car.seats + " Seats"}</p>
                   <p className="border-l-2 px-2">{car.car.fuel_type}</p>
                 </div>
-                <div className="absolute -top-5 -right-8 md:-top-20 md:-right-14 z-50">
+                <div className="absolute -top-5 -right-8 md:-top-15 md:-right-14 z-50">
                   <img
-                    src={Car}
+                    src={car.car.category.image_url}
                     alt="Car Image"
                     className="object-cover w-full h-16 md:w-full md:h-full"
                   />

@@ -34,7 +34,6 @@ export default function ProfileInfoPage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(values);
       if (response.status === 200) {
         toast.success("Profile updated successfully");
         handleGetProfile();
@@ -55,6 +54,8 @@ export default function ProfileInfoPage() {
     },
     validationSchema,
     onSubmit: handleSubmit,
+    validateOnChange: false,
+    validateOnBlur: true,
   });
 
   return <Info formik={formik} />;

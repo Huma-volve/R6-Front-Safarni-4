@@ -54,19 +54,24 @@ export default function ProfileInfo({ formik }: ProfileInfoProps) {
 
   return (
     <>
-      <BackButton router="/profile" />
-      <BorderedContainer>
-        <Card>
-          {Userloading ? (
-            <div className="flex items-center justify-center w-full h-full">
-              <Loader2 className="w-20 h-20 text-primary animate-spin" />
-            </div>
-          ) : (
-            <>
-              <CardTitle className="text-center text-xl">
+      <div className="flex items-center justify-between mb-4">
+        <BackButton router="/profile" />
+        <CardTitle className="text-center text-xl md:hidden block">
+          Personal Information
+        </CardTitle>
+      </div>
+      {Userloading ? (
+        <div className="flex items-center justify-center w-full h-[calc(100vh-300px)]">
+          <Loader2 className="w-20 h-20 text-primary animate-spin" />
+        </div>
+      ) : (
+        <>
+          <BorderedContainer>
+            <Card>
+              <CardTitle className="text-center text-xl md:block hidden">
                 Personal Information
               </CardTitle>
-              <CardContent>
+              <CardContent className="p-0">
                 <div className="flex items-center flex-col gap-4">
                   <form className="w-full" onSubmit={formik.handleSubmit}>
                     {profileInfo.map((info) => (
@@ -91,9 +96,10 @@ export default function ProfileInfo({ formik }: ProfileInfoProps) {
                           </div>
                         </div>
                         <div className="text-red-500 text-sm mt-2">
-                          {formik.touched[
+                          {(formik.touched[
                             info.name as keyof typeof formik.touched
-                          ] &&
+                          ] ||
+                            formik.submitCount > 0) &&
                             formik.errors[
                               info.name as keyof typeof formik.errors
                             ] && (
@@ -116,15 +122,19 @@ export default function ProfileInfo({ formik }: ProfileInfoProps) {
                         formik.isSubmitting
                       }
                     >
-                      Update
+                      {formik.isSubmitting ? (
+                        <Loader2 className="animate-spin w-5 h-5 text-white" />
+                      ) : (
+                        "Update"
+                      )}
                     </Button>
                   </form>
                 </div>
               </CardContent>
-            </>
-          )}
-        </Card>
-      </BorderedContainer>
+            </Card>
+          </BorderedContainer>
+        </>
+      )}
     </>
   );
 }

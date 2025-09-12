@@ -37,37 +37,33 @@ function FavoritePage() {
 
   return (
     <>
-      <div className="">
-        <div className="flex items-center relative">
-          <BackButton router={-1} />
-          <h1 className="text-2xl font-medium mb-6 absolute left-1/2 -translate-x-1/2">
-            Favorite
-          </h1>
-        </div>
-        {loading ? (
-          <div className="flex items-center justify-center w-full h-[calc(100vh-200px)]">
-            <Loader2 className="w-20 h-20 text-primary animate-spin" />
-          </div>
-        ) : favorite.length === 0 ? (
-          <div className="flex items-center justify-center w-full h-[calc(100vh-500px)]">
-            <h1 className="text-2xl font-medium text-muted">
-              No Favorite Found
-            </h1>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {favorite.map((item, index) => (
-                <MainCard
-                  key={index}
-                  item={item}
-                  onHeartClick={handleGetFavorite}
-                />
-              ))}
-            </div>
-          </>
-        )}
+      <div className="flex items-center relative">
+        <BackButton router={-1} />
+        <h1 className="text-2xl font-medium absolute left-1/2 -translate-x-1/2">
+          Favorite
+        </h1>
       </div>
+      {loading ? (
+        <div className="flex items-center justify-center w-full h-[calc(100vh-200px)]">
+          <Loader2 className="w-20 h-20 text-primary animate-spin" />
+        </div>
+      ) : favorite.length === 0 ? (
+        <div className="flex items-center justify-center w-full h-[calc(100vh-500px)]">
+          <h1 className="text-2xl font-medium text-muted">No Favorite Found</h1>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+            {favorite.map((item, index) => (
+              <MainCard
+                key={index}
+                item={item}
+                onHeartClick={handleGetFavorite}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }

@@ -15,7 +15,7 @@ export default function BackButton({ router }: { router: string | number }) {
   return (
     <div
       onClick={handleClick}
-      className="w-10 h-10 bg-foreground/30 text-muted rounded-full flex items-center justify-center cursor-pointer mb-4"
+      className="w-10 h-10 bg-foreground/30 text-muted rounded-full flex items-center justify-center cursor-pointer"
     >
       <ChevronLeft className="w-6 h-6" />
     </div>

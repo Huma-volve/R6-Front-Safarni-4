@@ -39,9 +39,10 @@ export default function ProfilePage() {
       try {
         setLoading(true);
         const BASE_URL = import.meta.env.VITE_BASE_URL;
+        const token = localStorage.getItem("token");
         const response = await axios.post(`${BASE_URL}profile`, fileData, {
           headers: {
-            Authorization: `Bearer 40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (response.status === 200) {
@@ -56,12 +57,11 @@ export default function ProfilePage() {
         setSelectedFile(null);
       }
     };
-
     uploadImage();
   }, [selectedFile, user, handleGetProfile]);
 
   return location.pathname === "/profile" ? (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col md:gap-6">
       <UserInfo
         user={user}
         handleFileChange={handleFileChange}

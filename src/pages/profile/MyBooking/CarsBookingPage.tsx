@@ -9,7 +9,7 @@ export default function CarsBookingPage() {
   const [bookingCars, setBookingCars] = useState<BookingCar[]>([]);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const token = "40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82";
+  const token = localStorage.getItem("token");
 
   const handleGetBookingCars = useCallback(async () => {
     try {

@@ -1,6 +1,7 @@
 import BackButton from "../common/BackButton";
 import { NavLink, Outlet } from "react-router-dom";
 import { Plane, Car, BedSingle, Ship } from "lucide-react";
+import { CardTitle } from "../ui/card";
 
 const tabs = [
   { name: "Flights", icon: <Plane />, href: "/profile/my-booking/flights" },
@@ -12,9 +13,16 @@ const tabs = [
 export default function MyBooking() {
   return (
     <>
-      <BackButton router={-1} />
+      <div className="flex items-center justify-between mb-4">
+        <BackButton router="/profile" />
+        <CardTitle className="text-center text-xl md:hidden block">
+          My Booking
+        </CardTitle>
+      </div>
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-medium text-center">My Booking</h1>
+        <h1 className="text-2xl font-medium text-center md:block hidden">
+          My Booking
+        </h1>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
           {tabs.map((tab) => (
             <NavLink

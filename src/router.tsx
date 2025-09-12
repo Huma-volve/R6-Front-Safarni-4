@@ -19,6 +19,7 @@ import FPassword from "./components/auth/FPassword";
 import Otp from "./components/auth/Otp";
 import NPassword from "./components/auth/NPassword";
 import Done from "./components/auth/Done";
+import NotFound from "./components/common/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "language",
-            element: <h1 className="text-2xl font-semibold">Language</h1>,
+            element: <NotFound />,
           },
           { path: "account-security", element: <AccountSecurityPage /> },
         ],
@@ -61,4 +62,5 @@ export const router = createBrowserRouter([
   { path: "/Otp", element: <Otp /> },
   { path: "/NPassword", element: <NPassword /> },
   { path: "/Done", element: <Done /> },
+  { path: "*", element: <NotFound /> },
 ]);

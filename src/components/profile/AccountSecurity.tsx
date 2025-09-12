@@ -47,13 +47,18 @@ export default function AccountSecurity({
 }) {
   return (
     <>
-      <BackButton router="/profile" />
+      <div className="flex items-center justify-between mb-4">
+        <BackButton router="/profile" />
+        <CardTitle className="text-center text-xl md:hidden block">
+          Account & Security
+        </CardTitle>
+      </div>
       <BorderedContainer>
         <Card className="flex flex-col gap-3">
-          <CardTitle className="text-center text-xl">
+          <CardTitle className="text-center text-xl hidden md:block">
             Account & Security
           </CardTitle>
-          <CardContent>
+          <CardContent className="p-0">
             <div className="flex items-center flex-col gap-4">
               {securityOptions.map((option) => (
                 <div
