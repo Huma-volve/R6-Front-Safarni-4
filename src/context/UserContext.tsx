@@ -20,11 +20,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleGetProfile = async () => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const token = localStorage.getItem("token");
     try {
       setUserLoading(true);
       const response = await axios.get(`${BASE_URL}profile`, {
         headers: {
-          Authorization: `Bearer 40|OCBC7IZByo8VotD5wprl56aAdzeEyNiaS59z64XG630f2c82`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 200) {

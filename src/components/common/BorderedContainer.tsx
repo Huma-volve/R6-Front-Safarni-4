@@ -10,7 +10,7 @@ function BorderedContainer({
     <div
       data-slot="card"
       className={cn(
-        "p-0.25 bg-gradient-to-b from-[#3F52B4] to-[#B22459] rounded-xl",
+        "p-0.25 md:bg-gradient-to-b from-[#3F52B4] to-[#B22459] rounded-xl",
         className
       )}
       {...props}
