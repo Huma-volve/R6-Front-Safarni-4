@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { BookingFlight, Flight } from "@/Types/Booking";
 import toast from "react-hot-toast";
 
-export default function FlightBookingPage() {
+export default function MyFlightBookingPage() {
   const [bookingFlights, setBookingFlights] = useState<BookingFlight[]>([]);
   const [bookingFlightsDetails, setBookingFlightsDetails] = useState<Flight[]>(
     []
