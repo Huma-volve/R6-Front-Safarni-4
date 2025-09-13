@@ -1,221 +1,244 @@
 // src/pages/CheckoutPage.tsx
-import { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
+import BackButton from "@/components/common/BackButton";
 
-const paymentOptions = ["PayPal", "Visa", "MasterCard"];
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
+
+const API_URL = import.meta.env.VITE_API_URL;
+const TOKEN = localStorage.getItem("token") || import.meta.env.VITE_TOKEN;
 
 export default function CheckoutPage() {
-  const [step, setStep] = useState<"options" | "form">("options");
-  const [selected, setSelected] = useState<string | null>(null);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
 
-  const getValidationSchema = () => {
-    if (selected === "PayPal") {
-      return Yup.object({
-        fullName: Yup.string().required("Required"),
-        email: Yup.string().email("Invalid email").required("Required"),
-      });
-    } else if (selected) {
-      return Yup.object({
-        fullName: Yup.string().required("Required"),
-        email: Yup.string().email("Invalid email").required("Required"),
-        expire: Yup.string().required("Required"),
-        cvv: Yup.string().required("Required"),
-      });
-    }
-    return Yup.object({});
-  };
+  const bookingId =
+    (location.state as any)?.booking_id || query.get("booking_id");
+  const bookingType =
+    (location.state as any)?.booking_type || query.get("booking_type");
+
+  const [paymentId, setPaymentId] = useState<string | null>(null);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!bookingId || !bookingType) return;
+
+    const createCheckout = async () => {
+      try {
+        const res = await fetch(`${API_URL}/checkout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TOKEN}`,
+          },
+          body: JSON.stringify({
+            booking_type: bookingType,
+            booking_id: bookingId,
+          }),
+        });
+
+        const data = await res.json();
+        console.log("Checkout response:", data);
+
+        if (res.ok && data.data) {
+          setPaymentId(data.data.payment_id);
+          setClientSecret(data.data.client_secret);
+        } else {
+          console.error("Checkout API error:", data);
+        }
+      } catch (err) {
+        console.error("Checkout request failed:", err);
+      }
+    };
+
+    createCheckout();
+  }, [bookingId, bookingType]);
+
+  if (!clientSecret) {
+    return <div className="p-6">Loading checkout...</div>;
+  }
 
   return (
-    <div className="flex flex-col md:flex-row h-auto md:h-[calc(100vh-130px)]">
-      {/* Left Side */}
-      <div className="hidden md:flex flex-1 items-center justify-center bg-gray-100 rounded-2xl h-full">
-        <img
-          src="/src/assets/paymentcard.png"
-          alt="checkout"
-          className="max-w-full md:max-w-sm w-full h-auto"
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
+      <div className="p-6 h-auto">
+        <div className="mb-4">
+          <BackButton />
+        </div>
+        <div className="flex flex-col md:flex-row h-auto md:h-[calc(100vh-130px)] rounded-2xl">
+          {/* Left Side */}
+          <div className="hidden md:flex flex-1 items-center justify-center bg-gray-100 rounded-2xl">
+            <img
+              src="/src/assets/paymentcard.png"
+              alt="Checkout"
+              className="max-w-full md:max-w-sm w-full h-auto"
+            />
+          </div>
+
+          {/* Right Side */}
+          <div className="flex-1 p-6 flex flex-col">
+            <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+              Payment Method 💳
+            </h1>
+            <PaymentOptions paymentId={paymentId!} />
+          </div>
+        </div>
+      </div>
+    </Elements>
+  );
+}
+
+function PaymentOptions({ paymentId }: { paymentId: string }) {
+  const [method, setMethod] = useState<"paypal" | "visa" | "mastercard" | null>(
+    null
+  );
+
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <div className="flex justify-center gap-4 mb-8">
+        <button
+          onClick={() => setMethod("paypal")}
+          className={`px-4 py-2 rounded-lg border ${
+            method === "paypal" ? "bg-blue-100 border-blue-500" : "bg-gray-100"
+          }`}
+        >
+          🅿️ Paypal
+        </button>
+        <button
+          onClick={() => setMethod("mastercard")}
+          className={`px-4 py-2 rounded-lg border ${
+            method === "mastercard"
+              ? "bg-yellow-100 border-yellow-500"
+              : "bg-gray-100"
+          }`}
+        >
+          💳 Mastercard
+        </button>
+        <button
+          onClick={() => setMethod("visa")}
+          className={`px-4 py-2 rounded-lg border ${
+            method === "visa" ? "bg-green-100 border-green-500" : "bg-gray-100"
+          }`}
+        >
+          💳 Visa
+        </button>
+      </div>
+
+      {method === "paypal" && (
+        <div className="text-center text-gray-600">
+          ✅ PayPal integration placeholder
+        </div>
+      )}
+
+      {(method === "visa" || method === "mastercard") && (
+        <CheckoutForm paymentId={paymentId} />
+      )}
+    </div>
+  );
+}
+
+function CheckoutForm({ paymentId }: { paymentId: string }) {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+
+    setLoading(true);
+    setMessage(null);
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement)!,
+    });
+
+    if (error) {
+      setMessage(error.message || "Something went wrong with Stripe");
+      setLoading(false);
+      return;
+    }
+
+    console.log("✅ Payment Method created:", paymentMethod);
+
+    try {
+      const res = await fetch(`${API_URL}/checkout/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${TOKEN}`,
+        },
+        body: JSON.stringify({
+          payment_id: paymentId,
+          payment_method_id: paymentMethod.id,
+        }),
+      });
+
+      const text = await res.text();
+      console.log("📩 Raw response:", text);
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        setMessage("❌ السيرفر رجع HTML مش JSON: " + text.substring(0, 100));
+        return;
+      }
+
+      if (res.ok && data.status === "succeeded") {
+        setMessage("✅ الدفع تم بنجاح والحجز اتأكد!");
+      } else {
+        setMessage("⚠️ الدفع لم يكتمل: " + (data.message || "Unknown error"));
+      }
+    } catch (err) {
+      setMessage("Server error أثناء تأكيد الدفع");
+      console.error("❌ Confirm request failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="border p-3 rounded-md">
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#32325d",
+                fontFamily: "Arial, sans-serif",
+                "::placeholder": {
+                  color: "#a0aec0",
+                },
+              },
+              invalid: {
+                color: "#e53e3e",
+              },
+            },
+          }}
         />
       </div>
 
-      {/* Right Side */}
-      <div className="flex-1 p-4 md:p-8 flex flex-col">
-        {/* Options Step */}
-        {step === "options" && (
-          <div className="flex flex-col flex-1 justify-between">
-            <div>
-              <h2 className="text-xl font-bold mb-6 text-center text-black">
-                Add Your Payment Method
-              </h2>
-              <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
-                {paymentOptions.map((option) => (
-                  <div
-                    key={option}
-                    className={`flex items-center gap-3 p-3 border rounded-full cursor-pointer transition ${
-                      selected === option
-                        ? "border-primary bg-blue-50"
-                        : "border-gray-300"
-                    }`}
-                    onClick={() => setSelected(option)}
-                  >
-                    <img
-                      src={`/src/assets/${option.toLowerCase()}.png`}
-                      alt={option}
-                      className="w-6 h-6"
-                    />
-                    <span className="font-medium text-gray-800">{option}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <Button type="submit" disabled={loading || !stripe} className="w-full">
+        {loading ? "جاري الدفع..." : "Continue"}
+      </Button>
 
-            <Button
-              disabled={!selected}
-              onClick={() => setStep("form")}
-              className="disabled:bg-gray-400 mt-6"
-            >
-              Continue
-            </Button>
-          </div>
-        )}
-
-        {/* Form Step */}
-        {step === "form" && (
-          <>
-            {/* Back Arrow */}
-            <div className="flex items-center mb-4">
-              <button
-                onClick={() => setStep("options")}
-                className="flex items-center text-gray-600"
-              >
-                <ArrowLeft className="w-8 h-8 rounded-full bg-gray-100 p-1" />
-              </button>
-            </div>
-
-            <h2 className="text-xl font-bold mb-6 text-center text-gray-800">
-              Choose Payment Method
-            </h2>
-
-            {/* Options again in form step */}
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
-              {paymentOptions.map((option) => (
-                <div
-                  key={option}
-                  className={`flex items-center gap-3 p-3 border rounded-full cursor-pointer transition ${
-                    selected === option
-                      ? "border-primary bg-blue-50"
-                      : "border-gray-300"
-                  }`}
-                  onClick={() => setSelected(option)}
-                >
-                  <img
-                    src={`/src/assets/${option.toLowerCase()}.png`}
-                    alt={option}
-                    className="w-6 h-6"
-                  />
-                  <span className="font-medium text-gray-800">{option}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Form based on selected option */}
-            {selected && (
-              <Formik
-                initialValues={{
-                  fullName: "",
-                  email: "",
-                  expire: "",
-                  cvv: "",
-                }}
-                validationSchema={getValidationSchema()}
-                onSubmit={(values) => {
-                  console.log("Payment Data:", values);
-                }}
-              >
-                {({ isSubmitting }) => (
-                  <Form className="space-y-4 flex flex-col flex-1 justify-between">
-                    <div>
-                      <div>
-                        <label className="block mb-1 text-gray-800">
-                          Full Name
-                        </label>
-                        <Field
-                          name="fullName"
-                          className="w-full border border-gray-300 p-2 rounded text-gray-800"
-                        />
-                        <ErrorMessage
-                          name="fullName"
-                          component="div"
-                          className="text-red-500 text-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block mb-1 text-gray-800">
-                          Email
-                        </label>
-                        <Field
-                          name="email"
-                          type="email"
-                          className="w-full border border-gray-300 p-2 rounded text-gray-800"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className="text-red-500 text-sm"
-                        />
-                      </div>
-
-                      {(selected === "Visa" || selected === "MasterCard") && (
-                        <div className="flex flex-col md:flex-row gap-4">
-                          <div className="w-full md:w-2/3">
-                            <label className="block mb-1 text-gray-800">
-                              Expire Date
-                            </label>
-                            <Field
-                              name="expire"
-                              className="w-full border border-gray-300 p-2 rounded text-gray-800"
-                            />
-                            <ErrorMessage
-                              name="expire"
-                              component="div"
-                              className="text-red-500 text-sm"
-                            />
-                          </div>
-
-                          <div className="w-full md:w-1/3">
-                            <label className="block mb-1 text-gray-800">
-                              CVV
-                            </label>
-                            <Field
-                              name="cvv"
-                              className="w-full border border-gray-300 p-2 rounded text-gray-800"
-                            />
-                            <ErrorMessage
-                              name="cvv"
-                              component="div"
-                              className="text-red-500 text-sm"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="disabled:bg-gray-400 mt-6"
-                    >
-                      Pay Now
-                    </Button>
-                  </Form>
-                )}
-              </Formik>
-            )}
-          </>
-        )}
-      </div>
-    </div>
+      {message && (
+        <div className="text-center mt-4 text-gray-700 font-medium">
+          {message}
+        </div>
+      )}
+    </form>
   );
 }

@@ -8,6 +8,10 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+import FlightsListsPage from "./pages/fightbooking/FlightsListsPage";
+import SearchFlightsPage from "./pages/fightbooking/SearchFlightsPage";
+import ChooseSeatPage from "./pages/fightbooking/ChooseSeatPage";
+import BoardingPassPage from "./pages/fightbooking/BoardingPassPage";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +42,10 @@ export const router = createBrowserRouter([
         ],
       },
       { path: "checkout", element: <CheckoutPage /> },
+      { path: "flights/search", element: <SearchFlightsPage /> },
+      { path: "flights/list", element: <FlightsListsPage /> },
+      { path: "flights/choose-seat", element: <ChooseSeatPage /> },
+      { path: "flights/boarding-pass", element: <BoardingPassPage /> },
     ],
   },
 ]);
