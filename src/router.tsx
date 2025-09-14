@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import HomePage from "./pages/home/HomePage";
 import FavoritePage from "./pages/favorite/FavoritePage";
@@ -7,7 +7,6 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
-import CheckoutPage from "./pages/checkout/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +24,14 @@ export const router = createBrowserRouter([
           { path: "info", element: <InfoPage /> },
           {
             path: "my-booking",
-            element: <h1 className="text-2xl font-semibold">My Booking</h1>,
+            element: <MyBookingPage />,
+            children: [
+              { index: true, element: <Navigate to="flights" replace /> },
+              { path: "flights", element: <MyFlightBookingPage /> },
+              { path: "cars", element: <MyCarsBookingPage /> },
+              { path: "tours", element: <MyToursBookingPage /> },
+              { path: "hotels", element: <MyHotelBookingPage /> },
+            ],
           },
           {
             path: "language",
@@ -37,7 +43,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: "checkout", element: <CheckoutPage /> },
     ],
   },
 ]);
