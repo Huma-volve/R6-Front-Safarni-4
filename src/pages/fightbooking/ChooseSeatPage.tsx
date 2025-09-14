@@ -98,7 +98,7 @@ export default function ChooseSeatPage() {
     <div className="p-8 mb-8">
       <Toaster position="top-center" />
       <div className="mb-6">
-        <BackButton />
+        <BackButton router={-1} />
       </div>
 
       <div className="flex flex-col md:flex-row gap-10 h-[calc(100vh-130px)]">

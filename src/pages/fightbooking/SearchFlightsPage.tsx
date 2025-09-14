@@ -22,7 +22,7 @@ export default function SearchFlights() {
   return (
     <div className="p-6 h-auto">
       <div className="mb-4">
-        <BackButton />
+        <BackButton router={-1} />
       </div>
       <div className="flex flex-col md:flex-row h-auto md:h-[calc(100vh-130px)]  rounded-2xl">
         {/* Left Side */}

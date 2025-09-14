@@ -106,7 +106,7 @@ export default function BoardingPassPage() {
   return (
     <div className="p-8">
       <div className="mb-6">
-        <BackButton />
+        <BackButton router={-1} />
       </div>
 
       <div className="flex flex-col md:flex-row gap-10">

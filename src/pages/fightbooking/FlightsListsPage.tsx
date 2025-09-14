@@ -77,7 +77,7 @@ export default function FlightsList() {
   return (
     <div className="p-6 h-auto">
       <div className="mb-6">
-        <BackButton />
+        <BackButton router={-1} />
       </div>
 
       <h1 className="text-2xl font-bold mb-6">Available Flights ✈️</h1>
