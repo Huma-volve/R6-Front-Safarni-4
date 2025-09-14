@@ -7,6 +7,16 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
+import FlightsListsPage from "./pages/fightbooking/FlightsListsPage";
+import SearchFlightsPage from "./pages/fightbooking/SearchFlightsPage";
+import ChooseSeatPage from "./pages/fightbooking/ChooseSeatPage";
+import BoardingPassPage from "./pages/fightbooking/BoardingPassPage";
+import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
+import MyFlightBookingPage from "./pages/profile/MyBooking/MyFlightBookingPage";
+import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
+import MyToursBookingPage from "./pages/profile/MyBooking/MyToursBookingPage";
+import MyHotelBookingPage from "./pages/profile/MyBooking/MyHotelBookingPage";
 import GetStart from "./components/auth/GetStart";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/Signup";
@@ -14,17 +24,13 @@ import FPassword from "./components/auth/FPassword";
 import Otp from "./components/auth/Otp";
 import NPassword from "./components/auth/NPassword";
 import Done from "./components/auth/Done";
-import NotFound from "./components/common/NotFound";
-import MyHotelBookingPage from "./pages/profile/MyBooking/MyHotelBookingPage";
-import MyToursBookingPage from "./pages/profile/MyBooking/MyToursBookingPage";
-import MyFlightBookingPage from "./pages/profile/MyBooking/MyFlightBookingPage";
-import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
-import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import HotelBookingPage from "./pages/hotelBooking/HotelBookingPage";
 import RoomBookingPage from "./pages/roomBooking/RoomBookingPage";
 import Search from "./pages/home/Search/Search";
 import Filter from "./pages/home/Search/Filter/Filter";
 import Tour from "./pages/home/Search/Filter/Tour";
+import NotFound from "./components/common/NotFound";
+import SuccessPage from "./pages/checkout/SuccessPage";
 
 export const router = createBrowserRouter([
   {
@@ -57,13 +63,20 @@ export const router = createBrowserRouter([
           },
           {
             path: "language",
-            element: <NotFound />,
+            element: <h1 className="text-2xl font-semibold">Language</h1>,
           },
-          { path: "account-security", element: <AccountSecurityPage /> },
+          {
+            path: "account-security",
+            element: <AccountSecurityPage />,
+          },
         ],
       },
-      { path: "hotel-booking", element: <HotelBookingPage /> },
-      { path: "hotel-booking/:id", element: <RoomBookingPage /> },
+      { path: "checkout", element: <CheckoutPage /> },
+      { path: "checkout/success", element: <SuccessPage /> },
+      { path: "flights/search", element: <SearchFlightsPage /> },
+      { path: "flights/list", element: <FlightsListsPage /> },
+      { path: "flights/choose-seat", element: <ChooseSeatPage /> },
+      { path: "flights/boarding-pass", element: <BoardingPassPage /> },
     ],
   },
   { path: "/GetStart", element: <GetStart /> },
