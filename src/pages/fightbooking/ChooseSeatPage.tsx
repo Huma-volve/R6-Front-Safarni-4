@@ -116,7 +116,7 @@ export default function ChooseSeatPage() {
           <h1 className="text-2xl font-bold mb-6">Choose seat</h1>
 
           {/* Legend */}
-          <div className="flex gap-6 mb-6 text-sm">
+          <div className="flex flex-wrap gap-6 mb-6 text-sm">
             <div className="flex items-center gap-2">
               <span className="w-5 h-5 rounded bg-primary"></span> Available
             </div>
