@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Menu, Search, SlidersHorizontal } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import UserContext from "@/context/UserContext";
 
 const links = [
   { name: "Home", to: "/" },
@@ -18,6 +20,8 @@ const links = [
 ];
 
 export default function NavBar() {
+  const user = useContext(UserContext);
+
   return (
     <header className="bg-white shadow-sm ">
       <div className="max-w-[1240px] mx-auto px-6 py-3 flex items-center justify-between h-20">
@@ -32,19 +36,18 @@ export default function NavBar() {
           <NavigationMenuList className="flex gap-10">
             {links.map(({ name, to }) => (
               <NavigationMenuItem key={to}>
-                <NavLink to={to}>
-                  {({ isActive }) => (
-                    <NavigationMenuLink
-                      className={
-                        isActive
-                          ? "text-primary font-semibold"
-                          : "text-gray-900 font-medium hover:text-primary transition-colors"
-                      }
-                    >
-                      {name}
-                    </NavigationMenuLink>
-                  )}
-                </NavLink>
+                <NavigationMenuLink asChild>
+                  <NavLink
+                    to={to}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-primary font-semibold"
+                        : "text-gray-900 font-medium hover:text-primary transition-colors"
+                    }
+                  >
+                    {name}
+                  </NavLink>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
@@ -66,8 +69,8 @@ export default function NavBar() {
 
           <NavLink to="/profile">
             <img
-              src="/avatar.jpg"
-              alt="user"
+              src={user?.image || "/avatar.jpg"}
+              alt={user?.name || "user"}
               className="w-8 h-8 rounded-full border"
             />
           </NavLink>
