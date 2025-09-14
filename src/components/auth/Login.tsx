@@ -4,6 +4,7 @@ import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { FaFacebook, FaApple } from "react-icons/fa";
 import { useState } from "react";
 import BackButton from "../common/BackButton";
+import { Input } from "@/components/ui/input";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -169,13 +170,13 @@ export default function Login() {
                 </label>
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input
+                  <Input
                     id="email"
                     type="email"
                     placeholder="Email"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-900"
                     value={formData.email}
                     onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-900"
                   />
                 </div>
               </div>
@@ -189,7 +190,7 @@ export default function Login() {
                 </label>
                 <div className="relative">
                   <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                  <input
+                  <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="*********"

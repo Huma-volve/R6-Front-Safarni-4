@@ -14,7 +14,7 @@ export default function Tour() {
       : "All Locations";
 
   return (
-    <div className=" bg-white px-10 py-6">
+    <div className="bg-white px-10 py-6">
       <BackButton router={-1} />
       <h2 className="text-xl font-semibold text-gray-900 mb-6">
         {selectedLocation}{" "}
@@ -24,7 +24,16 @@ export default function Tour() {
       {tours.length === 0 ? (
         <p className="text-gray-500">No tours found with your filters.</p>
       ) : (
-        <div className="grid grid-cols-4 gap-6">
+        <div
+          className="
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
+          md:grid-cols-3 
+          lg:grid-cols-4 
+          gap-6
+        "
+        >
           {tours.map((tour: any) => (
             <TourCard key={tour.id} tour={tour} />
           ))}
