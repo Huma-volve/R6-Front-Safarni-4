@@ -9,21 +9,26 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
-import BackButton from "@/components/common/BackButton";
+import BackButton from "../../components/common/BackButton";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
 const API_URL = import.meta.env.VITE_API_URL;
 const TOKEN = localStorage.getItem("token") || import.meta.env.VITE_TOKEN;
 
+type LocationState = {
+  booking_id?: string;
+  booking_type?: string;
+};
+
 export default function CheckoutPage() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
 
-  const bookingId =
-    (location.state as any)?.booking_id || query.get("booking_id");
-  const bookingType =
-    (location.state as any)?.booking_type || query.get("booking_type");
+  const state = location.state as LocationState;
+
+  const bookingId = state?.booking_id || query.get("booking_id");
+  const bookingType = state?.booking_type || query.get("booking_type");
 
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -70,7 +75,7 @@ export default function CheckoutPage() {
     <Elements stripe={stripePromise} options={{ clientSecret }}>
       <div className="p-6 h-auto">
         <div className="mb-4">
-          <BackButton />
+          <BackButton router={-1} />
         </div>
         <div className="flex flex-col md:flex-row h-auto md:h-[calc(100vh-130px)] rounded-2xl">
           {/* Left Side */}
