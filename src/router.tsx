@@ -7,6 +7,7 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      { path: "checkout", element: <CheckoutPage /> },
     ],
   },
 ]);
