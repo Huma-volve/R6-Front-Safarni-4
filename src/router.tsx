@@ -22,6 +22,9 @@ import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
 import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import HotelBookingPage from "./pages/hotelBooking/HotelBookingPage";
 import RoomBookingPage from "./pages/roomBooking/RoomBookingPage";
+import Search from "./pages/home/Search/Search";
+import Filter from "./pages/home/Search/Filter/Filter";
+import Tour from "./pages/home/Search/Filter/Tour";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +35,10 @@ export const router = createBrowserRouter([
       { path: "favorite", element: <FavoritePage /> },
       { path: "compare", element: <ComparePage /> },
       { path: "maps", element: <MapsPage /> },
+      { path: "/Search", element: <Search /> },
+      { path: "/Filter", element: <Filter /> },
+      { path: "tour", element: <Tour /> },
+
       {
         path: "profile",
         element: <ProfilePage />,
