@@ -28,6 +28,7 @@ import Search from "./pages/home/Search/Search";
 import Filter from "./pages/home/Search/Filter/Filter";
 import Tour from "./pages/home/Search/Filter/Tour";
 import NotFound from "./components/common/NotFound";
+import SuccessPage from "./pages/checkout/SuccessPage";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
         ],
       },
       { path: "checkout", element: <CheckoutPage /> },
+      { path: "checkout/success", element: <SuccessPage /> },
       { path: "flights/search", element: <SearchFlightsPage /> },
       { path: "flights/list", element: <FlightsListsPage /> },
       { path: "flights/choose-seat", element: <ChooseSeatPage /> },

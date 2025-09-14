@@ -1,6 +1,6 @@
 // src/pages/CheckoutPage.tsx
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -32,6 +32,7 @@ export default function CheckoutPage() {
 
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!bookingId || !bookingType) return;
@@ -78,7 +79,6 @@ export default function CheckoutPage() {
           <BackButton router={-1} />
         </div>
         <div className="flex flex-col md:flex-row h-auto md:h-[calc(100vh-130px)] rounded-2xl">
-          {/* Left Side */}
           <div className="hidden md:flex flex-1 items-center justify-center bg-gray-100 rounded-2xl">
             <img
               src="/src/assets/paymentcard.png"
@@ -87,12 +87,11 @@ export default function CheckoutPage() {
             />
           </div>
 
-          {/* Right Side */}
           <div className="flex-1 p-6 flex flex-col">
             <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
               Payment Method 💳
             </h1>
-            <PaymentOptions paymentId={paymentId!} />
+            <PaymentOptions paymentId={paymentId!} navigate={navigate} />
           </div>
         </div>
       </div>
@@ -100,7 +99,13 @@ export default function CheckoutPage() {
   );
 }
 
-function PaymentOptions({ paymentId }: { paymentId: string }) {
+function PaymentOptions({
+  paymentId,
+  navigate,
+}: {
+  paymentId: string;
+  navigate: (path: string) => void;
+}) {
   const [method, setMethod] = useState<"paypal" | "visa" | "mastercard" | null>(
     null
   );
@@ -143,13 +148,19 @@ function PaymentOptions({ paymentId }: { paymentId: string }) {
       )}
 
       {(method === "visa" || method === "mastercard") && (
-        <CheckoutForm paymentId={paymentId} />
+        <CheckoutForm paymentId={paymentId} navigate={navigate} />
       )}
     </div>
   );
 }
 
-function CheckoutForm({ paymentId }: { paymentId: string }) {
+function CheckoutForm({
+  paymentId,
+  navigate,
+}: {
+  paymentId: string;
+  navigate: (path: string) => void;
+}) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -201,7 +212,7 @@ function CheckoutForm({ paymentId }: { paymentId: string }) {
       }
 
       if (res.ok && data.status === "succeeded") {
-        setMessage("✅ الدفع تم بنجاح والحجز اتأكد!");
+        navigate("/checkout/success");
       } else {
         setMessage("⚠️ الدفع لم يكتمل: " + (data.message || "Unknown error"));
       }
@@ -240,9 +251,7 @@ function CheckoutForm({ paymentId }: { paymentId: string }) {
       </Button>
 
       {message && (
-        <div className="text-center mt-4 text-gray-700 font-medium">
-          {message}
-        </div>
+        <div className="text-center mt-4 text-gray-700 font-medium">{message}</div>
       )}
     </form>
   );

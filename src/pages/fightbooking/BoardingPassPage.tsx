@@ -151,9 +151,21 @@ export default function BoardingPassPage() {
                 {(() => {
                   const dep = new Date(flight.departure_time);
                   const arr = new Date(flight.arrival_time);
-                  const diffMs = arr.getTime() - dep.getTime();
-                  const diffHours = Math.floor(diffMs / 1000 / 60 / 60);
-                  const diffMinutes = Math.floor((diffMs / 1000 / 60) % 60);
+
+                  let diffHours = arr.getHours() - dep.getHours();
+                  let diffMinutes = arr.getMinutes() - dep.getMinutes();
+
+                  // if minutes negative, borrow 1 hour
+                  if (diffMinutes < 0) {
+                    diffMinutes += 60;
+                    diffHours -= 1;
+                  }
+
+                  // if hours negative or zero, arrival is next day
+                  if (diffHours <= 0) {
+                    diffHours += 24;
+                  }
+
                   return `${diffHours}h ${diffMinutes}m`;
                 })()}
               </span>
