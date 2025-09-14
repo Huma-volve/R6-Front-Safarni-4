@@ -19,6 +19,9 @@ import FPassword from "./components/auth/FPassword";
 import Otp from "./components/auth/Otp";
 import NPassword from "./components/auth/NPassword";
 import Done from "./components/auth/Done";
+import Search from "./pages/home/Search/Search";
+import Filter from "./pages/home/Search/Filter/Filter";
+import Tour from "./pages/home/Search/Filter/Tour";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,10 @@ export const router = createBrowserRouter([
       { path: "favorite", element: <FavoritePage /> },
       { path: "compare", element: <ComparePage /> },
       { path: "maps", element: <MapsPage /> },
+      { path: "/Search", element: <Search /> },
+      { path: "/Filter", element: <Filter /> },
+      { path: "tour", element: <Tour /> },
+
       {
         path: "profile",
         element: <ProfilePage />,
