@@ -7,6 +7,8 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
+import ToursGridRedux from "./pages/tour/ToursPage";
+import TourDetailsPage from "./pages/tour/TourDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,8 @@ export const router = createBrowserRouter([
       { path: "favorite", element: <FavoritePage /> },
       { path: "compare", element: <ComparePage /> },
       { path: "maps", element: <MapsPage /> },
+      { path: "tour", element: <ToursGridRedux /> },
+      { path: "/tours/:id", element: <TourDetailsPage /> },
       {
         path: "profile",
         element: <ProfilePage />,
