@@ -13,10 +13,17 @@ import SearchFlightsPage from "./pages/fightbooking/SearchFlightsPage";
 import ChooseSeatPage from "./pages/fightbooking/ChooseSeatPage";
 import BoardingPassPage from "./pages/fightbooking/BoardingPassPage";
 import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
-import MyFlightBookingPage from "./pages/profile/MyBooking/MyFlightBookingPage";
-import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
-import MyToursBookingPage from "./pages/profile/MyBooking/MyToursBookingPage";
-import MyHotelBookingPage from "./pages/profile/MyBooking/MyHotelBookingPage";
+import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
+import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
+import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
+import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
+import GetStart from "./components/auth/GetStart";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/Signup";
+import FPassword from "./components/auth/FPassword";
+import Otp from "./components/auth/Otp";
+import NPassword from "./components/auth/NPassword";
+import Done from "./components/auth/Done";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +34,10 @@ export const router = createBrowserRouter([
       { path: "favorite", element: <FavoritePage /> },
       { path: "compare", element: <ComparePage /> },
       { path: "maps", element: <MapsPage /> },
+      { path: "/Search", element: <Search /> },
+      { path: "/Filter", element: <Filter /> },
+      { path: "tour", element: <Tour /> },
+
       {
         path: "profile",
         element: <ProfilePage />,
