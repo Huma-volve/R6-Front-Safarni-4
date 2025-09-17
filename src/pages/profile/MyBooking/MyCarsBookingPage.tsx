@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import type { BookingCar } from "@/Types/Booking";
 
-export default function CarsBookingPage() {
+export default function MyCarsBookingPage() {
   const [loading, setLoading] = useState(false);
   const [bookingCars, setBookingCars] = useState<BookingCar[]>([]);
 

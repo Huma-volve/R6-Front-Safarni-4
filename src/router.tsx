@@ -7,11 +7,6 @@ import MapsPage from "./pages/MapsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import InfoPage from "./pages/profile/InfoPage";
 import AccountSecurityPage from "./pages/profile/AccountSecurityPage";
-import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
-import FlightBookingPage from "./pages/profile/MyBooking/FlightBookingPage";
-import CarsBookingPage from "./pages/profile/MyBooking/CarsBookingPage";
-import ToursBookingPage from "./pages/profile/MyBooking/ToursBookingPage";
-import HotelBookingPage from "./pages/profile/MyBooking/HotelBookingPage";
 import GetStart from "./components/auth/GetStart";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/Signup";
@@ -20,9 +15,13 @@ import Otp from "./components/auth/Otp";
 import NPassword from "./components/auth/NPassword";
 import Done from "./components/auth/Done";
 import NotFound from "./components/common/NotFound";
-import CarDetails from "./pages/carBooking/CarDetails";
-import CarBookingPage from "./pages/carBooking/CarBookingPage";
-import MapWithRoute from "./pages/carBooking/MapWithRoute";
+import MyHotelBookingPage from "./pages/profile/MyBooking/MyHotelBookingPage";
+import MyToursBookingPage from "./pages/profile/MyBooking/MyToursBookingPage";
+import MyFlightBookingPage from "./pages/profile/MyBooking/MyFlightBookingPage";
+import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
+import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
+import HotelBookingPage from "./pages/hotelBooking/HotelBookingPage";
+import RoomBookingPage from "./pages/roomBooking/RoomBookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -43,10 +42,10 @@ export const router = createBrowserRouter([
             element: <MyBookingPage />,
             children: [
               { index: true, element: <Navigate to="flights" replace /> },
-              { path: "flights", element: <FlightBookingPage /> },
-              { path: "cars", element: <CarsBookingPage /> },
-              { path: "tours", element: <ToursBookingPage /> },
-              { path: "hotels", element: <HotelBookingPage /> },
+              { path: "flights", element: <MyFlightBookingPage /> },
+              { path: "cars", element: <MyCarsBookingPage /> },
+              { path: "tours", element: <MyToursBookingPage /> },
+              { path: "hotels", element: <MyHotelBookingPage /> },
             ],
           },
           {
@@ -56,6 +55,8 @@ export const router = createBrowserRouter([
           { path: "account-security", element: <AccountSecurityPage /> },
         ],
       },
+      { path: "hotel-booking", element: <HotelBookingPage /> },
+      { path: "hotel-booking/:id", element: <RoomBookingPage /> },
     ],
   },
   { path: "/GetStart", element: <GetStart /> },
