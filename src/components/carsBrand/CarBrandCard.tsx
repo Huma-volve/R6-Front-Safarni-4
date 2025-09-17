@@ -1,32 +1,24 @@
-import axios from "axios";
-import { useEffect } from "react";
-
-type Props = {
+type Brand = {
+  brandName: string;
   img: string;
-  text: string;
-  num: number;
+  rate: number;
+  id: number;
 };
-const CarBrandCard = ({ img, text, num } : Props) => {
-  const get = async() => {
-    const res = await axios.get(
-      "http://round5-safarnia.huma-volve.com/api/cars"
-    );
-    console.log(res.data);
-  }
-
-  useEffect(() => {
-    get();
-  }, []);
-
-
-
-  return <div className="flex flex-col items-center bg-white rounded-md p-5 px-10 shadow">
-    <div className="w-14 h-14 mb-2 flex justify-center">
-    <img src={img} alt="car brand image" />
-    </div>
-    <p className="text-xl">{text}</p>
-    <p className="text-primary">+{num}</p>
-    </div>;
-};
-
-export default CarBrandCard;
+export default function Brands({ item }: { item: Brand }) {
+  return (
+    <>
+      <div className="px-6 py-4 bg-white transition-shadow duration-300 flex flex-col justify-center items-center gap-3">
+        <img
+          src={item.img}
+          alt="brand logo"
+          loading="lazy"
+          className="w-20 h-16 object-fill rounded-md hover:scale-105 transition-transform duration-300"
+        />
+        <h2 className="font-semibold text-lg md:text-xl text-gray-800">
+          {item.brandName}
+        </h2>
+        <h4 className="text-sm text-[#1E429F]">+{item.rate}</h4>
+      </div>
+    </>
+  );
+}

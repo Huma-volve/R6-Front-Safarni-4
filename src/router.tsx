@@ -20,6 +20,9 @@ import Otp from "./components/auth/Otp";
 import NPassword from "./components/auth/NPassword";
 import Done from "./components/auth/Done";
 import NotFound from "./components/common/NotFound";
+import CarDetails from "./pages/carBooking/CarDetails";
+import CarBookingPage from "./pages/carBooking/CarBookingPage";
+import MapWithRoute from "./pages/carBooking/MapWithRoute";
 
 export const router = createBrowserRouter([
   {
@@ -62,5 +65,8 @@ export const router = createBrowserRouter([
   { path: "/Otp", element: <Otp /> },
   { path: "/NPassword", element: <NPassword /> },
   { path: "/Done", element: <Done /> },
+  { path: "/CarBooking", element: <CarBookingPage /> },
+  { path: "/CarDetails", element: <CarDetails /> },
+  { path: "/MapWithRoute", element: <MapWithRoute /> },
   { path: "*", element: <NotFound /> },
 ]);
