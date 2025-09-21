@@ -13,7 +13,7 @@ import BackButton from "../../components/common/BackButton";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_BASE_URL;
 const TOKEN = localStorage.getItem("token") || import.meta.env.VITE_TOKEN;
 
 type LocationState = {
@@ -39,7 +39,7 @@ export default function CheckoutPage() {
 
     const createCheckout = async () => {
       try {
-        const res = await fetch(`${API_URL}/checkout`, {
+        const res = await fetch(`${API_URL}checkout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -188,7 +188,7 @@ function CheckoutForm({
     console.log("✅ Payment Method created:", paymentMethod);
 
     try {
-      const res = await fetch(`${API_URL}/checkout/confirm`, {
+      const res = await fetch(`${API_URL}checkout/confirm`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -251,7 +251,9 @@ function CheckoutForm({
       </Button>
 
       {message && (
-        <div className="text-center mt-4 text-gray-700 font-medium">{message}</div>
+        <div className="text-center mt-4 text-gray-700 font-medium">
+          {message}
+        </div>
       )}
     </form>
   );

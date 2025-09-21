@@ -2,8 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
 
-const API_URL = `${import.meta.env.VITE_API_URL}`;
+const API_URL = `${import.meta.env.VITE_BASE_URL}`;
 const TOKEN = localStorage.getItem("token") || import.meta.env.VITE_TOKEN;
 
 interface Flight {
@@ -29,6 +31,9 @@ export default function BoardingPassPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+
   const state = location.state as LocationState;
   const stateFlight = state.flight;
   const selectedSeats = state.selectedSeats || [];
@@ -49,7 +54,7 @@ export default function BoardingPassPage() {
     const fetchFlight = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${API_URL}/booking/flight`, {
+        const res = await fetch(`${API_URL}booking/flight`, {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
             "Content-Type": "application/json",
@@ -74,7 +79,7 @@ export default function BoardingPassPage() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/booking/flight`, {
+      const res = await fetch(`${API_URL}booking/flight`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${TOKEN}`,
@@ -132,7 +137,6 @@ export default function BoardingPassPage() {
 
             <div className="flex justify-between text-sm">
               <span className="font-semibold">{flight.airline}</span>
-              <span>✈️</span>
               <span>
                 {new Date(flight.departure_time).toLocaleDateString("en-US", {
                   dateStyle: "medium",
@@ -178,16 +182,31 @@ export default function BoardingPassPage() {
             </div>
 
             <div className="flex justify-between">
-              <span>Seats</span>
-              <span className="font-semibold">
-                {selectedSeats.join(", ") || "-"}
-              </span>
-            </div>
-
-            <div className="flex justify-between">
               <span>Total Price</span>
               <span className="font-semibold">${totalPrice?.toFixed(2)}</span>
             </div>
+          </div>
+
+          <div className="flex items-center justify-between mt-6 p-4 rounded-lg border">
+            {/* Profile Pic + Name (Left) */}
+            <div className="flex items-center gap-3">
+              <img
+                src={user?.image || "/default-avatar.png"}
+                alt={user?.name || "User"}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold">{user?.name || "Guest"}</p>
+                <p className="text-gray-500 text-sm">
+                  {user?.email || "No email"}
+                </p>
+              </div>
+            </div>
+
+            {/* Seat (Right) */}
+            <p className="text-gray-700 font-medium">
+              Seat: {selectedSeats[0] || "-"}
+            </p>
           </div>
 
           {/* QR Code */}
