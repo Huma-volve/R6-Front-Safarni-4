@@ -34,6 +34,9 @@ import SuccessPage from "./pages/checkout/SuccessPage";
 
 import ToursGridRedux from "./pages/tour/ToursPage";
 import TourDetailsPage from "./pages/tour/TourDetailsPage";
+import CarBookingPage from "./pages/carBooking/CarBookingPage";
+import CarDetails from "./pages/carBooking/CarDetails";
+import MapWithRoute from "./pages/carBooking/MapWithRoute";
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +104,7 @@ export const router = createBrowserRouter([
   { path: "/NPassword", element: <NPassword /> },
   { path: "/Done", element: <Done /> },
   { path: "/CarBooking", element: <CarBookingPage /> },
-  { path: "/CarDetails", element: <CarDetails /> },
+  { path: "/CarDetails/:id", element: <CarDetails /> },
   { path: "/MapWithRoute", element: <MapWithRoute /> },
   { path: "*", element: <NotFound /> },
 ]);

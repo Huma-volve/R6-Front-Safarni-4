@@ -10,8 +10,8 @@ export default function App() {
   return (
     <>
       {token ? (
-        <BookingProvider>
-          <UserProvider>
+        <UserProvider>
+          <BookingProvider>
             <div className="min-h-screen flex flex-col">
               <NavBar />
               <main className="flex-1 p-6 w-full max-w-[1240px] mx-auto">
@@ -19,8 +19,8 @@ export default function App() {
               </main>
             </div>
             <Toaster />
-          </UserProvider>
-        </BookingProvider>
+          </BookingProvider>
+        </UserProvider>
       ) : (
         <Navigate to="/GetStart" />
       )}

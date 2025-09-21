@@ -1,23 +1,23 @@
 import type { CarData } from "@/Types/CarDataTypes";
 import { Link } from "react-router-dom";
-import carImages from "./CarImages";
-
 
 type PopularCarsCardProps = {
   item: CarData;
 };
 export default function CarPopularCard({ item }: PopularCarsCardProps) {
-  const carImage = carImages.find((img) => img.id === Number(item.id));
   return (
     <>
       <div className="px-6 pb-4 shadow-sm rounded-xl hover:shadow-md transition-shadow duration-300">
         <div className="flex justify-between items-center  ">
           <h2 className="font-semibold text-lg md:text-md lg:text-xl">
-            {item.model}GLA 250 SUV
+            {item.model}
           </h2>
           <div>
             <img
-              src={carImage?.url}
+              src={item.category.image_url}
+              onError={(e) =>
+                (e.currentTarget.src = "/src/assets/images/64027.jpg")
+              }
               alt={item.brand}
               loading="lazy"
               className="w-44 h-32 object-fill rounded-md hover:scale-105 transition-transform duration-300"
