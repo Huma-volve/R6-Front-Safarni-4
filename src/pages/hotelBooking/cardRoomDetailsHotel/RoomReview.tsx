@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { reviews } from "@/pages/hotelBooking/BookingHotel";
+import { Button } from "@/components/ui/button";
 
 function RoomReview({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
   return (
@@ -77,12 +78,12 @@ function RoomReview({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
             <span className="text-[--primary] text-2xl">$150.00</span>/night
           </p>
         </div>
-        <button
+        <Button
           onClick={() => setActiveTab("booking")}
-          className="w-full bg-[--primary] text-white py-3 rounded-lg mt-6 hover:opacity-90 transition"
+          className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
         >
           Book Now
-        </button>
+        </Button>
       </div>
     </div>
   );

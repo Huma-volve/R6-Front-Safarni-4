@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ImgStar from "@/assets/images/icons/ImgStar.svg";
 import CameraIcon from "@/assets/images/icons/CameraIcon.svg";
+import { Button } from "@/components/ui/button";
 
 function RoomAddReview() {
   const [rating, setRating] = useState(0);
@@ -74,12 +75,12 @@ function RoomAddReview() {
       </div>
 
       {/* Submit Button */}
-      <button
+      <Button
         onClick={handleSubmit}
-        className="w-full bg-[--primary] text-white py-3 rounded-lg hover:opacity-90 transition"
+        className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
       >
         Submit
-      </button>
+      </Button>
     </div>
   );
 }

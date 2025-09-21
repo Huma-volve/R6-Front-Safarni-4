@@ -75,7 +75,7 @@ export default function MapWithRoute() {
 
   return (
     <>
-      <div className="h-screen relative">
+      <div className="h-screen relative w-full">
         {start && (
           <MapContainer
             center={start}
@@ -120,7 +120,7 @@ export default function MapWithRoute() {
         )}
       </div>
 
-      <div className="absolute bottom-[-50%] w-[40%] mx-auto left-0 right-0 z-[9999]">
+      <div className="absolute  w-[40%] mx-auto left-0 right-0 z-[9999]">
         <CarTicketCard
           showConfirm={true}
           onConfirm={() => {
