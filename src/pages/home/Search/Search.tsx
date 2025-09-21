@@ -2,6 +2,7 @@ import BackButton from "@/components/common/BackButton";
 import { Search, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import Tour from "@/pages/home/Search/Tour";
+import MainCard from "@/components/common/MainCard";
 
 export default function SearchBar() {
   const [allLocations, setAllLocations] = useState<string[]>([]);
@@ -45,7 +46,7 @@ export default function SearchBar() {
         <div className="relative flex-1">
           <div
             className="flex items-center bg-white border border-gray-300 rounded-2xl px-5 py-2 shadow-sm 
-          focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-blue-300 transition-all mb-4"
+          focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-blue-300 transition-all"
           >
             <Search className="text-blue-600 mr-3 w-5 h-5 " strokeWidth={1} />
             <input
@@ -89,7 +90,7 @@ export default function SearchBar() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
         {places.map((place) => (
-          <Tour key={place.id} tour={place} />
+          <MainCard key={place.id} item={place} onHeartClick={handleLocationClick} />
         ))}
       </div>
     </div>

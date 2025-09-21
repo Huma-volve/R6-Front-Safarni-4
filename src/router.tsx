@@ -44,12 +44,13 @@ export const router = createBrowserRouter([
       { path: "favorite", element: <FavoritePage /> },
       { path: "compare", element: <ComparePage /> },
       { path: "maps", element: <MapsPage /> },
-      { path: "/Search", element: <Search /> },
-      { path: "/Filter", element: <Filter /> },
+      { path: "Search", element: <Search /> },
+      { path: "Filter", element: <Filter /> },
+
       { path: "tour", element: <Tour /> },
 
-      { path: "tour", element: <ToursGridRedux /> },
-      { path: "/tours/:id", element: <TourDetailsPage /> },
+      { path: "tours", element: <ToursGridRedux /> },
+      { path: "tours/:id", element: <TourDetailsPage /> },
       {
         path: "profile",
         element: <ProfilePage />,

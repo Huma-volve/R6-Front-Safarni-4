@@ -21,7 +21,7 @@ export default function HomePage() {
       id: 3,
       img: "/src/assets/cat3.jpg",
       name: "Tours",
-      path: "ToursBookingPage",
+      path: "tours",
     },
     {
       id: 4,
@@ -171,6 +171,7 @@ export default function HomePage() {
           <div className="flex gap-5 overflow-x-auto md:hidden scrollbar-hide">
             {visibleCards.map((card) => (
               <Card
+              
                 key={card.id}
                 className="min-w-[250px] rounded-xl shadow-lg shadow-gray-300 overflow-hidden hover:shadow-md hover:scale-101 transition duration-300 !p-0"
               >

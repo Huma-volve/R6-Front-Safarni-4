@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Star, Heart, ImagePlus } from "lucide-react";
 import type { AppDispatch, RootState } from "../../store/store";
 import { fetchTourDetails, fetchTourReviews, clearDetails } from "../../store/tour/tour";
+import BackButton from "@/components/common/BackButton";
 
 export default function TourDetailsPage() {
     const { id = "" } = useParams();
@@ -27,9 +28,7 @@ export default function TourDetailsPage() {
     return (
         <div className="min-h-screen bg-[#f6f7fb] text-slate-900">
             <div className="mx-auto w-[min(1000px,95vw)] p-4">
-                <button onClick={() => nav('/tour')} className="mb-2 grid h-8 w-8 place-items-center rounded-full border border-slate-200 bg-white shadow">
-                    <ArrowLeft className="h-4 w-4" />
-                </button>
+                <BackButton router={-1} />
 
                 <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
                     <img src={details.img} alt={details.title} className="h-64 w-full object-cover md:h-80" />

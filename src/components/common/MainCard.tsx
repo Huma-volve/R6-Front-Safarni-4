@@ -25,7 +25,7 @@ export default function MainCard({ item, onHeartClick }: MainCardProps) {
       });
       if (response.status === 200) {
         toast.success("Added to favorites successfully");
-        onHeartClick();
+        // onHeartClick();
       }
     } catch (error) {
       console.log(error);
@@ -54,58 +54,59 @@ export default function MainCard({ item, onHeartClick }: MainCardProps) {
 
   return (
     <>
-      <Card className="md:p-4 p-2 shadow-gray-300 shadow-2xl relative rounded-3xl">
-        <div className="rounded-3xl overflow-hidden">
-          <img src={item.image} alt="" className="w-full h-62 object-cover" />
-        </div>
+      <Link to={`/tours/${item.id}`} >
+        <Card className="md:p-4 p-2 shadow-gray-300 shadow-2xl relative rounded-3xl">
+          <div className="rounded-3xl overflow-hidden">
+            <img src={item.image} alt="" className="w-full h-62 object-cover" />
+          </div>
 
-        <div
-          className="absolute top-8 right-8 bg-white rounded-full p-2 cursor-pointer"
-          onClick={() =>
-            item.is_favorite || item.favorited_at === null
-              ? handleRemoveFromFavorite(item.id)
-              : handleAddToFavorite(item.id)
-          }
-        >
-          <Heart
-            className={`w-5 h-5 ${
-              location.pathname === "/favorite" || item.is_favorite
+          <div
+            className="absolute top-8 right-8 bg-white rounded-full p-2 cursor-pointer"
+            onClick={() =>
+              item.is_favorite || item.favorited_at === null
+                ? handleRemoveFromFavorite(item.id)
+                : handleAddToFavorite(item.id)
+            }
+          >
+            <Heart
+              className={`w-5 h-5 ${location.pathname === "/favorite" || item.is_favorite
                 ? "fill-red-500 text-red-500"
                 : "text-muted"
-            }`}
-          />
-        </div>
-
-        <Link to={`/destination/${item.id}`} key={item.id}>
-          <div className="flex flex-col mt-2 text-muted p-4 md:p-0">
-            <div className="flex justify-between items-center">
-              <h1 className="text-lg font-semibold text-black">
-                {item.title.split(" ").slice(0, 2).join(" ")}
-              </h1>
-              <p className="text-muted flex items-center gap-2 text-xsm">
-                <Star className="w-5 h-5 text-secondary fill-secondary" />
-                {item.rating.toFixed(1) + " (" + item.views + ")"}
-              </p>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <p className="line-clamp-1">{item.location}</p>
-              <p className="flex items-center">
-                <Dot className="w-10 h-10 text-primary" />
-                {item.transportation}
-              </p>
-            </div>
-
-            <p>
-              From{" "}
-              <span className="text-primary font-semibold">
-                {Math.floor(item.price)}$
-              </span>{" "}
-              per person
-            </p>
+                }`}
+            />
           </div>
-        </Link>
-      </Card>
+
+          <Link to={`/destination/${item.id}`} key={item.id}>
+            <div className="flex flex-col mt-2 text-muted p-4 md:p-0">
+              <div className="flex justify-between items-center">
+                <h1 className="text-lg font-semibold text-black">
+                  {item.title.split(" ").slice(0, 2).join(" ")}
+                </h1>
+                <p className="text-muted flex items-center gap-2 text-xsm">
+                  <Star className="w-5 h-5 text-secondary fill-secondary" />
+                  {item.rating.toFixed(1) + " (" + item.views + ")"}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <p className="line-clamp-1">{item.location}</p>
+                <p className="flex items-center">
+                  <Dot className="w-10 h-10 text-primary" />
+                  {item.transportation}
+                </p>
+              </div>
+
+              <p>
+                From{" "}
+                <span className="text-primary font-semibold">
+                  {Math.floor(item.price)}$
+                </span>{" "}
+                per person
+              </p>
+            </div>
+          </Link>
+        </Card>
+      </Link>
     </>
   );
 }
