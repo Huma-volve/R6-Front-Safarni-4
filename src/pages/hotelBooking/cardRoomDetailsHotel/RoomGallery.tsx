@@ -4,6 +4,7 @@ import "swiper/css/grid";
 import "swiper/css/navigation";
 import { Grid, Navigation } from "swiper/modules";
 import CameraIcon from "@/assets/images/icons/CameraIcon.svg";
+import { Button } from "@/components/ui/button";
 
 export default function RoomGallery({
   setActiveTab,
@@ -72,9 +73,9 @@ export default function RoomGallery({
             <span className="text-[--primary] text-2xl">$150.00</span>/night
           </p>
         </div>
-        <button onClick={() => setActiveTab("booking")} className="w-full bg-[--primary] text-white py-3 rounded-lg mt-6 hover:opacity-90 transition">
+        <Button onClick={() => setActiveTab("booking")} className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition">
           Book Now
-        </button>
+        </Button>
       </div>
     </>
   );

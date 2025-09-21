@@ -23,6 +23,7 @@ import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import HotelBookingPage from "./pages/hotelBooking/HotelBookingPage";
 import RoomBookingPage from "./pages/roomBooking/RoomBookingPage";
 import CarBookingPage from "./pages/carBooking/CarBookingPage";
+import MapWithRoute from "./pages/carBooking/MapWithRoute";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
               { path: "tours", element: <MyToursBookingPage /> },
               { path: "hotels", element: <MyHotelBookingPage /> },
             ],
+          },
+          {
+            path: "car-booking",
+            element: <CarBookingPage />,
+          },
+          {
+            path: "MapWithRoute",
+            element: <MapWithRoute />,
           },
           {
             path: "language",

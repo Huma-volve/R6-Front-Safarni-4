@@ -1,3 +1,5 @@
+import BackButton from "@/components/common/BackButton";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 function RoomBookingNow() {
@@ -6,6 +8,7 @@ function RoomBookingNow() {
   const [infantCount, setInfantCount] = useState(0 as number);
   return (
     <div className="w-full flex flex-col mb-14">
+      <BackButton router="/" />
       <div className="flex justify-between items-center border-b mb-8 pb-4">
         <div className="">
           <p className="text-xl mb-2">Adults</p>
@@ -81,12 +84,12 @@ function RoomBookingNow() {
           </button>
         </div>
       </div>
-      <button
+      <Button
         onClick={() => {}}
-        className="w-full bg-[--primary] text-white py-3 rounded-lg mt-6 hover:opacity-90 transition"
+        className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
       >
         Check Out
-      </button>
+      </Button>
     </div>
   );
 }

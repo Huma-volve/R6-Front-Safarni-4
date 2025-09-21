@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 function RoomBooking({
   setActiveTab,
 }: {
@@ -76,12 +78,12 @@ function RoomBooking({
         className="border p-3 bg-[#F3F4F6] rounded-md w-full h-32 resize-none focus:outline-none focus:ring-2 focus:ring-[#202a3e]"
         placeholder="Enter here..."
       />
-      <button
+      <Button
         onClick={() => setActiveTab("bookingNow")}
-        className="w-full bg-[--primary] text-white py-3 rounded-lg mt-6 hover:opacity-90 transition"
+        className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
       >
         Continue
-      </button>
+      </Button>
     </div>
   );
 }

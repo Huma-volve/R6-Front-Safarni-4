@@ -1,6 +1,7 @@
 import BathIcon from "@/assets/images/icons/BathIcon.svg";
 import BedIcon from "@/assets/images/icons/BedIcon.svg";
 import SquareIcon from "@/assets/images/icons/SquareIcon.svg";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 function RoomAbout({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
   const [expanded, setExpanded] = useState(false);
@@ -52,9 +53,12 @@ function RoomAbout({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
           <span className="text-[--primary] text-2xl">$150.00</span>/night
         </p>
       </div>
-      <button onClick={() => setActiveTab("booking")} className="w-full bg-[--primary] text-white py-3 rounded-lg mt-6 hover:opacity-90 transition">
+      <Button
+        onClick={() => setActiveTab("booking")}
+        className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
+      >
         Book Now
-      </button>
+      </Button>
     </div>
   );
 }

@@ -3,9 +3,7 @@ import NavBar from "./components/navbar/NavBar";
 import { UserProvider } from "./context/UserContext";
 import { Toaster } from "react-hot-toast";
 import { BookingProvider } from "./context/BookingContext";
-import RoomAbout from "./pages/hotelBooking/cardRoomDetailsHotel/RoomAbout";
-import RoomImageSection from "./pages/hotelBooking/cardRoomDetailsHotel/RoomImageSection";
-import CardRoomDetailsHotel from "./pages/hotelBooking/cardRoomDetailsHotel/CardRoomDetailsHotel";
+import CarDetails from "./pages/carBooking/CarDetails";
 
 export default function App() {
   const token = localStorage.getItem("token");
@@ -19,9 +17,8 @@ export default function App() {
               <NavBar />
               <main className="flex-1 p-6 w-full max-w-[1240px] mx-auto">
                 <Outlet />
-                <CardRoomDetailsHotel />
-                <RoomAbout setActiveTab={() => {}} />
-              </main>
+                <CarDetails />
+                              </main>
             </div>
             <Toaster />
           </UserProvider>
