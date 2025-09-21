@@ -100,5 +100,8 @@ export const router = createBrowserRouter([
   { path: "/Otp", element: <Otp /> },
   { path: "/NPassword", element: <NPassword /> },
   { path: "/Done", element: <Done /> },
+  { path: "/CarBooking", element: <CarBookingPage /> },
+  { path: "/CarDetails", element: <CarDetails /> },
+  { path: "/MapWithRoute", element: <MapWithRoute /> },
   { path: "*", element: <NotFound /> },
 ]);
