@@ -22,6 +22,7 @@ import MyCarsBookingPage from "./pages/profile/MyBooking/MyCarsBookingPage";
 import MyBookingPage from "./pages/profile/MyBooking/MyBookingPage";
 import HotelBookingPage from "./pages/hotelBooking/HotelBookingPage";
 import RoomBookingPage from "./pages/roomBooking/RoomBookingPage";
+import CarBookingPage from "./pages/carBooking/CarBookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ export const router = createBrowserRouter([
       },
       { path: "hotel-booking", element: <HotelBookingPage /> },
       { path: "hotel-booking/:id", element: <RoomBookingPage /> },
+      { path: "car-booking", element: <CarBookingPage /> },
     ],
   },
   { path: "/GetStart", element: <GetStart /> },
@@ -66,8 +68,6 @@ export const router = createBrowserRouter([
   { path: "/Otp", element: <Otp /> },
   { path: "/NPassword", element: <NPassword /> },
   { path: "/Done", element: <Done /> },
-  { path: "/CarBooking", element: <CarBookingPage /> },
-  { path: "/CarDetails", element: <CarDetails /> },
-  { path: "/MapWithRoute", element: <MapWithRoute /> },
+
   { path: "*", element: <NotFound /> },
 ]);
