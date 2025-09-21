@@ -40,7 +40,7 @@ function RoomReview({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
           // pagination={{ clickable: true }}
           spaceBetween={20}
           slidesPerView={1}
-          className="w-full max-w-xs 2xl:max-w-3xl xl:max-w-xl mx-auto"
+          className="w-md"
         >
           {reviews?.map((review) => (
             <SwiperSlide key={review.id}>

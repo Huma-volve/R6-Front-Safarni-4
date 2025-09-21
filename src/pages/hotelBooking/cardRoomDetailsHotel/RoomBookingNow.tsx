@@ -34,7 +34,7 @@ function RoomBookingNow() {
           </button>
         </div>
       </div>
-      <div className="flex justify-between items-center border-b mb-8 pb-4">
+      <div className="flex justify-between items-center border-b mb-8 pb-4 w-md">
         <div className="">
           <p className="text-xl mb-2">Children</p>
           <p className="text-[#4B5563]">Ages 2-17</p>

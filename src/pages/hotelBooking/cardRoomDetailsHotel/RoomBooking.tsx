@@ -12,7 +12,7 @@ function RoomBooking({
       </h3>
       <div>
         <p className="text-xl font-[500] mb-2">Check In</p>
-        <ul className="w-full max-w-xs 2xl:max-w-2xl xl:max-w-xl   mb-5 grid grid-flow-col gap-4 overflow-x-auto text-center px-2">
+        <ul className="w-md mb-5 grid grid-flow-col gap-4 overflow-x-auto text-center px-2">
           <li className="flex-1 min-w-[150px] border px-10 py-3 rounded-[10rem] text-white bg-[--check]">
             <p className="mb-1 text-[14px]">Today</p>
             <p>4 Oct</p>

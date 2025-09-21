@@ -22,7 +22,7 @@ export default function RoomGallery({
           <span className="text-[--primary] text-md">add Photo</span>
         </div>
       </div>
-      <div className="w-full max-w-sm xl:max-w-xl mx-auto relative">
+      <div className="relative w-[70%]">
         <button className="hidden xl:block prev-btn absolute -left-14 top-1/2 -translate-y-1/2 bg-gray-200 px-4 py-2  rounded-full shadow">
           {"<"}
         </button>
@@ -73,7 +73,10 @@ export default function RoomGallery({
             <span className="text-[--primary] text-2xl">$150.00</span>/night
           </p>
         </div>
-        <Button onClick={() => setActiveTab("booking")} className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition">
+        <Button
+          onClick={() => setActiveTab("booking")}
+          className="w-full  py-3 rounded-lg mt-6 hover:opacity-90 transition"
+        >
           Book Now
         </Button>
       </div>

@@ -12,7 +12,7 @@ type RoomHeaderProps = {
 function RoomHeader({ activeTab, setActiveTab }: RoomHeaderProps) {
   return (
     <>
-      <div className="w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div>
           <div className="flex justify-between items-center">
             <p className="text-sm bg-[--primary-foreground] text-primary py-2 px-4 rounded-2xl">

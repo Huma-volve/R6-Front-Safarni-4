@@ -1,6 +1,5 @@
 // src/store/tour/tour.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   ApiResponse,
   ApiTour,
@@ -33,7 +32,7 @@ export const fetchTours = createAsyncThunk<Tour[]>("tours/fetch", async () => {
 
 export type TourDetails = Tour & {
   slots: { slot_id: number; max_seats: number }[];
-  duration: number; // أيام/ساعات حسب الـAPI
+  duration: number;
   highlights: string[];
   guide: string;
   transportation: string;

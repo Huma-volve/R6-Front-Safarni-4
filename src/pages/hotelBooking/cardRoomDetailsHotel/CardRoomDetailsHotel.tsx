@@ -6,12 +6,12 @@ import RoomBookingNow from "./RoomBookingNow";
 function CardRoomDetailsHotel() {
   const [activeTab, setActiveTab] = useState("about");
   return (
-    <div className="flex flex-col md:flex-row gap-10 w-full">
+    <div className="flex flex-col md:flex-row gap-10">
       <div className="flex-1">
         <RoomImageSection />
       </div>
       {activeTab === "bookingNow" ? (
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <RoomBookingNow />
         </div>
       ) : (

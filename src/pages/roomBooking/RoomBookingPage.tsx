@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import SearchBar from "@/components/common/SearchBar";
 import BackButton from "@/components/common/BackButton";
 import type { Room } from "@/Types/Rooms";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function RoomBookingPage() {
   const [rooms, setRooms] = useState([]);
@@ -80,29 +80,31 @@ export default function RoomBookingPage() {
           )}
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
             {rooms.map((room: Room) => (
-              <Card key={room.id} className="p-2 md:p-2">
-                <CardContent className="md:p-0">
-                  {/* Image */}
-                  <div className="flex items-center justify-center rounded-xl overflow-hidden">
-                    <img
-                      src={room.image}
-                      className="object-cover w-full h-32"
-                      alt="Room"
-                    />
-                  </div>
+              <Link to={"/hotel-booking/" + id + "/" + room.id}>
+                <Card key={room.id} className="p-2 md:p-2">
+                  <CardContent className="md:p-0">
+                    {/* Image */}
+                    <div className="flex items-center justify-center rounded-xl overflow-hidden">
+                      <img
+                        src={room.image}
+                        className="object-cover w-full h-32"
+                        alt="Room"
+                      />
+                    </div>
 
-                  <div className="flex flex-col gap-2 p-2">
-                    <h1>{room?.name || "Unknown"}</h1>
-                    <p className="text-muted">
-                      From{" "}
-                      <span className="text-primary">
-                        {Number(room.price).toFixed(0)}$
-                      </span>{" "}
-                      Per Night
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="flex flex-col gap-2 p-2">
+                      <h1>{room?.name || "Unknown"}</h1>
+                      <p className="text-muted">
+                        From{" "}
+                        <span className="text-primary">
+                          {Number(room.price).toFixed(0)}$
+                        </span>{" "}
+                        Per Night
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </>

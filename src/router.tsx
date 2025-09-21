@@ -37,6 +37,7 @@ import TourDetailsPage from "./pages/tour/TourDetailsPage";
 import CarBookingPage from "./pages/carBooking/CarBookingPage";
 import CarDetails from "./pages/carBooking/CarDetails";
 import MapWithRoute from "./pages/carBooking/MapWithRoute";
+import CardRoomDetailsHotel from "./pages/hotelBooking/cardRoomDetailsHotel/CardRoomDetailsHotel";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,7 @@ export const router = createBrowserRouter([
 
       { path: "hotel-booking", element: <HotelBookingPage /> },
       { path: "hotel-booking/:id", element: <RoomBookingPage /> },
+      { path: "hotel-booking/:id/:room_id", element: <CardRoomDetailsHotel /> },
 
       { path: "car-booking", element: <CarBookingPage /> },
     ],
