@@ -32,6 +32,7 @@ import Tour from "./pages/home/Search/Filter/Tour";
 import NotFound from "./components/common/NotFound";
 import SuccessPage from "./pages/checkout/SuccessPage";
 
+
 export const router = createBrowserRouter([
   {
     path: "/",

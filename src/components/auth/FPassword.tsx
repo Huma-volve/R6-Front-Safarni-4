@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FiMail, FiKey } from "react-icons/fi";
 import BackButton from "../common/BackButton";
 import { Link, useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/input";
 
 export default function FPassword() {
   const [email, setEmail] = useState("");
@@ -104,7 +105,7 @@ export default function FPassword() {
                 </label>
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
+                  <Input
                     id="email"
                     type="email"
                     value={email}

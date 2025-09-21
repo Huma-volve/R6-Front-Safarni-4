@@ -58,15 +58,11 @@ export default function NavBar() {
         {/* Icons + Mobile Menu */}
         <div className="flex items-center gap-4">
           <NavLink to="/search">
-            <button>
-              <Search className="w-5 h-5 text-gray-600 hover:text-primary" />
-            </button>
+            <Search className="w-5 h-5 text-gray-600 hover:text-primary cursor-pointer" />
           </NavLink>
 
-          <NavLink to="/filter">
-            <button>
-              <SlidersHorizontal className="w-5 h-5 text-gray-600 hover:text-primary" />
-            </button>
+          <NavLink to="/Filter">
+            <SlidersHorizontal className="w-5 h-5 text-gray-600 hover:text-primary cursor-pointer" />
           </NavLink>
 
           <NavLink to="/profile">
