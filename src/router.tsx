@@ -32,6 +32,8 @@ import Tour from "./pages/home/Search/Filter/Tour";
 import NotFound from "./components/common/NotFound";
 import SuccessPage from "./pages/checkout/SuccessPage";
 
+import ToursGridRedux from "./pages/tour/ToursPage";
+import TourDetailsPage from "./pages/tour/TourDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +48,8 @@ export const router = createBrowserRouter([
       { path: "/Filter", element: <Filter /> },
       { path: "tour", element: <Tour /> },
 
+      { path: "tour", element: <ToursGridRedux /> },
+      { path: "/tours/:id", element: <TourDetailsPage /> },
       {
         path: "profile",
         element: <ProfilePage />,
