@@ -251,7 +251,9 @@ function CheckoutForm({
       </Button>
 
       {message && (
-        <div className="text-center mt-4 text-gray-700 font-medium">{message}</div>
+        <div className="text-center mt-4 text-gray-700 font-medium">
+          {message}
+        </div>
       )}
     </form>
   );

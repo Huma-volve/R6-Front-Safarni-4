@@ -45,7 +45,7 @@ export default function SearchBar() {
         <div className="relative flex-1">
           <div
             className="flex items-center bg-white border border-gray-300 rounded-2xl px-5 py-2 shadow-sm 
-            focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-blue-300 transition-all mb-4"
+          focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-blue-300 transition-all mb-4"
           >
             <Search className="text-blue-600 mr-3 w-5 h-5 " strokeWidth={1} />
             <input
@@ -56,8 +56,8 @@ export default function SearchBar() {
               onFocus={() => setShowList(true)}
               onBlur={() => setShowList(false)}
               className="flex-1 bg-transparent text-gray-700 placeholder-gray-400 text-md font-medium
-                border-0 shadow-none outline-none 
-                focus:border-0 focus:ring-0 focus:shadow-none"
+              border-0 shadow-none outline-none 
+              focus:border-0 focus:ring-0 focus:shadow-none"
             />
           </div>
 
@@ -87,7 +87,7 @@ export default function SearchBar() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-6 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
         {places.map((place) => (
           <Tour key={place.id} tour={place} />
         ))}

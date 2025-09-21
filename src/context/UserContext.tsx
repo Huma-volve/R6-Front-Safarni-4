@@ -10,8 +10,8 @@ const UserContext = createContext<{
 }>({
   user: null,
   Userloading: false,
-  setUserLoading: () => {},
-  handleGetProfile: () => {},
+  setUserLoading: () => { },
+  handleGetProfile: () => { },
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {

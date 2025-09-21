@@ -176,10 +176,10 @@ export default function Filter() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white px-10">
+    <div className="min-h-screen bg-white px-4 sm:px-6 md:px-10">
       <BackButton router={-1} />
 
-      <div className="flex flex-wrap gap-4 mb-3">
+      <div className="flex flex-wrap gap-3 mb-3">
         {sortOptions.map((option, i) => (
           <button
             key={i}
@@ -196,7 +196,7 @@ export default function Filter() {
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-3 mb-8 ">
+      <div className="flex flex-wrap gap-3 mb-8">
         {sortSecondary.map((option, i) => (
           <button
             key={i}
@@ -216,7 +216,7 @@ export default function Filter() {
       <h2 className="text-lg font-semibold text-gray-900 mb-4 border-white">
         Budget Range
       </h2>
-      <div className="mb-8 px-40">
+      <div className="mb-8 px-4 sm:px-10 md:px-20 lg:px-40">
         <div className="h-32 mb-4 relative">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
@@ -274,7 +274,7 @@ export default function Filter() {
           </span>
         </h2>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {adventureTypes.map((type) => {
             const Icon = type.icon;
             return (
@@ -316,7 +316,7 @@ export default function Filter() {
         </div>
 
         <div className="relative" ref={containerRef}>
-          <div className="flex items-center bg-white border border-gray-200 rounded-xl px-4 py-2 shadow-sm focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-blue-300 transition-all">
+          <div className="flex items-center bg-white border border-gray-200 rounded-xl px-4 py-2 shadow-sm">
             <Search className="text-gray-600 mr-2 w-5 h-5" strokeWidth={1} />
             <input
               type="text"
@@ -357,7 +357,7 @@ export default function Filter() {
             Multi Select
           </span>
         </h2>
-        <div className="flex justify-start items-center gap-15 px-50 ">
+        <div className="flex flex-wrap gap-3 md:gap-10">
           {[1, 2, 3, 4, 5].map((r) => (
             <button
               key={r}
@@ -366,7 +366,7 @@ export default function Filter() {
               className={`flex items-center space-x-1 px-6 py-4 rounded-3xl border transition-colors ${
                 selectedRating.includes(r)
                   ? "border-blue-500 bg-blue-50"
-                  : "border-gray-400 "
+                  : "border-gray-400"
               }`}
             >
               <Star
@@ -386,7 +386,7 @@ export default function Filter() {
         </div>
       </div>
 
-      <div className="flex space-x-10 mb-8">
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <Button
           type="button"
           onClick={() => {
@@ -397,7 +397,7 @@ export default function Filter() {
             setSearchLocation("");
             setSelectedSort("");
           }}
-          className="flex-1 py-5 px-4 border bg-white border-blue-900 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors text-md"
+          className="flex-1 py-5 px-4 border bg-white border-blue-900 rounded-xl text-gray-700 font-medium hover:bg-gray-50 text-md"
         >
           Clear All
         </Button>
