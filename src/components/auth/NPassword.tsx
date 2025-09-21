@@ -1,13 +1,105 @@
 import { useState } from "react";
 import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import BackButton from "../common/BackButton";
 
 export default function NPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { email, otp } = location.state || {};
+
+  const handleReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (!email || !otp) {
+      alert("Email or OTP is missing!");
+      return;
+    }
+
+    if (!password || password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Unauthorized: token not found");
+        navigate("/forgot-password");
+        return;
+      }
+
+      console.log("Sending reset password request:", {
+        email,
+        otp,
+        hasPassword: !!password,
+        hasToken: !!token,
+      });
+
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}reset-password`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email,
+            otp,
+            password,
+            password_confirmation: confirmPassword,
+          }),
+        }
+      );
+
+      const responseText = await res.text();
+
+      if (!res.ok) {
+        let errorMessage = "Failed to reset password";
+        if (responseText) {
+          try {
+            const errorData = JSON.parse(responseText);
+            errorMessage = errorData.message || errorData.error || errorMessage;
+          } catch (e: unknown) {
+            console.error("Failed to parse error response:", e);
+            errorMessage = responseText;
+          }
+        }
+        throw new Error(errorMessage);
+      }
+
+      let data: any = {};
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch (e: unknown) {
+          console.warn("Response is not JSON, treating as success");
+        }
+      }
+
+      localStorage.removeItem("token");
+
+      alert("Password reset successful!");
+      navigate("/login");
+    } catch (err: unknown) {
+      console.error("Reset Password Error:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "Something went wrong";
+      alert(`Error: ${errorMessage}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -54,7 +146,7 @@ export default function NPassword() {
               </p>
             </div>
 
-            <form className="flex flex-col gap-4">
+            <form className="flex flex-col gap-4" onSubmit={handleReset}>
               <div className="w-full">
                 <label className="text-black font-medium mb-1 block text-sm">
                   Password

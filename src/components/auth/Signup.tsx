@@ -68,7 +68,6 @@ export default function SignUp() {
       }
 
       const data = await res.json();
-      console.log("Sign up successfully:", data);
 
       if (data?.data?.token) {
         localStorage.setItem("token", data.data.token);

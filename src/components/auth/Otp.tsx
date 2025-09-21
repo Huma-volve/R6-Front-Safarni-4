@@ -56,14 +56,41 @@ export default function Otp() {
         }),
       });
 
+      const responseText = await res.text();
+
       if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.message || "Invalid code, please try again");
+        let errorMessage = "Invalid code, please try again";
+        if (responseText) {
+          try {
+            const errData = JSON.parse(responseText);
+            errorMessage = errData.message || errorMessage;
+          } catch (e) {
+            console.error("Failed to parse error response:", e);
+          }
+        }
+        throw new Error(errorMessage);
       }
 
-      navigate("/NPassword", { state: { email } });
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
+      let data: any = {};
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch (e) {
+          throw new Error("Invalid server response");
+        }
+      }
+
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      } else {
+      }
+
+      navigate("/NPassword", { state: { email, otp: enteredOtp } });
+    } catch (err: unknown) {
+      console.error("OTP Verification Error:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "Something went wrong";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -72,6 +99,29 @@ export default function Otp() {
   const handleResend = async () => {
     setTimeLeft(30);
     setError(null);
+
+    try {
+      const baseUrl = import.meta.env.VITE_BASE_URL?.replace(/\/+$/, "") || "";
+      const res = await fetch(`${baseUrl}/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      console.log("Resend response:", data);
+
+      if ((data as any).otp) {
+        console.log("DEV OTP (from resend):", (data as any).otp);
+      } else {
+        console.log(
+          "OTP not present in resend response. Check email or server logs."
+        );
+      }
+    } catch (err: any) {
+      console.error("Resend failed:", err);
+      setError("Failed to resend OTP");
+    }
   };
 
   return (

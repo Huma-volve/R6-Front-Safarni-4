@@ -24,22 +24,19 @@ export default function FPassword() {
     setLoading(true);
 
     try {
-      const baseUrl = import.meta.env.VITE_BASE_URL;
-
-      const res = await fetch(`${baseUrl}forgot-password`, {
+      const baseUrl = import.meta.env.VITE_BASE_URL?.replace(/\/+$/, "") || "";
+      const res = await fetch(`${baseUrl}/forgot-password`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to send OTP");
-      }
-
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       console.log("OTP response:", data);
+
+      if ((data as any).otp) {
+        console.log("DEV OTP (from response):", (data as any).otp);
+      }
 
       navigate("/otp", { state: { email } });
     } catch (err: any) {
