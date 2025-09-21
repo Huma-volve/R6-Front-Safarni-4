@@ -32,28 +32,13 @@ export default function NPassword() {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Unauthorized: token not found");
-        navigate("/forgot-password");
-        return;
-      }
-
-      console.log("Sending reset password request:", {
-        email,
-        otp,
-        hasPassword: !!password,
-        hasToken: !!token,
-      });
-
       const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}reset-password`,
+        `${import.meta.env.VITE_BASE_URL}forgot-password`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             email,

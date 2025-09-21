@@ -13,6 +13,7 @@ export default function Otp() {
   const navigate = useNavigate();
   const location = useLocation();
   const email = (location.state as { email: string })?.email;
+
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -35,6 +36,7 @@ export default function Otp() {
 
   const handleVerify = async () => {
     const enteredOtp = otp.join("");
+
     if (enteredOtp.length < 5) {
       setError("Please enter all 5 digits");
       return;
@@ -82,7 +84,6 @@ export default function Otp() {
 
       if (data?.token) {
         localStorage.setItem("token", data.token);
-      } else {
       }
 
       navigate("/NPassword", { state: { email, otp: enteredOtp } });
