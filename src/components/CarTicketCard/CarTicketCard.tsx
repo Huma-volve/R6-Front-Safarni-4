@@ -31,8 +31,8 @@ export default function CarTicketCard({
 }: CarTicketCardProps) {
   return (
     <>
-      <div className="border rounded-lg shadow-sm  p-4 bg-white w-full container">
-        <div className="flex justify-between items-center">
+      <div className="absolute bottom-[10%] order rounded-lg shadow-sm  p-4 bg-white w-full container">
+        <div className="flex justify-between items-center ">
           <div>
             <h2 className="font-semibold text-gray-800">
               {selectedCar ? `${selectedCar.brand} ${selectedCar.model}` : "Car Model"}

@@ -71,6 +71,14 @@ export const router = createBrowserRouter([
             ],
           },
           {
+            path: "car-booking",
+            element: <CarBookingPage />,
+          },
+          {
+            path: "MapWithRoute",
+            element: <MapWithRoute />,
+          },
+          {
             path: "language",
             element: <h1 className="text-2xl font-semibold">Language</h1>,
           },
@@ -94,6 +102,9 @@ export const router = createBrowserRouter([
       { path: "flights/list", element: <FlightsListsPage /> },
       { path: "flights/choose-seat", element: <ChooseSeatPage /> },
       { path: "flights/boarding-pass", element: <BoardingPassPage /> },
+      { path: "hotel-booking", element: <HotelBookingPage /> },
+      { path: "hotel-booking/:id", element: <RoomBookingPage /> },
+      { path: "car-booking", element: <CarBookingPage /> },
     ],
   },
   { path: "/GetStart", element: <GetStart /> },
