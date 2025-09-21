@@ -2,32 +2,43 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import cat1 from "../../assets/cat1.jpg";
+import cat2 from "../../assets/cat2.jpg";
+import cat3 from "../../assets/cat3.jpg";
+import cat4 from "../../assets/cat4.jpg";
+
+import luxor from "../../assets/luxor.jpg";
+import dahab from "../../assets/dahab.jpg";
+import fayoum from "../../assets/fayoum.jpg";
+import alam from "../../assets/alam.jpg";
+import type { Tour } from "@/Types/Tours";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   const categories = [
     {
       id: 1,
-      img: "/src/assets/cat1.jpg",
+      img: cat1,
       name: "Flight",
       path: "flights/search",
     },
     {
       id: 2,
-      img: "/src/assets/cat2.jpg",
+      img: cat2,
       name: "Cars",
       path: "CarBooking",
     },
     {
       id: 3,
-      img: "/src/assets/cat3.jpg",
+      img: cat3,
       name: "Tours",
       path: "tours",
     },
     {
       id: 4,
-      img: "/src/assets/cat4.jpg",
+      img: cat4,
       name: "Hotel",
-      path: "/hotel-booking",
+      path: "hotel-booking",
     },
   ];
 
@@ -38,7 +49,7 @@ export default function HomePage() {
       location: "Luxor",
       rating: 4.3,
       price: "150$",
-      image: "../src/assets/luxor.jpg",
+      image: luxor,
     },
     {
       id: 2,
@@ -46,7 +57,7 @@ export default function HomePage() {
       location: "Dahab",
       rating: 4.5,
       price: "250$",
-      image: "../src/assets/dahab.jpg",
+      image: dahab,
     },
     {
       id: 3,
@@ -54,7 +65,7 @@ export default function HomePage() {
       location: "Fayoum",
       rating: 4.2,
       price: "200$",
-      image: "../src/assets/fayoum.jpg",
+      image: fayoum,
     },
     {
       id: 4,
@@ -62,11 +73,11 @@ export default function HomePage() {
       location: "Marsa Alam",
       rating: 4.8,
       price: "220$",
-      image: "../src/assets/alam.jpg",
+      image: alam,
     },
   ];
 
-  const [cards, setCards] = useState<any[]>([]);
+  const [cards, setCards] = useState<Tour[]>([]);
   const [showAll, setShowAll] = useState(false);
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -134,7 +145,7 @@ export default function HomePage() {
       <div className="text-xl font-normal mb-20">
         <h1 className="mb-6">Categories</h1>
 
-        <div className="grid grid-cols-4 gap-1 md:gap-10 lg:gap-10 mt-6 md:mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-10 lg:gap-10">
           {categories.map((cat) => (
             <Link
               key={cat.id}
@@ -144,7 +155,7 @@ export default function HomePage() {
               <img
                 src={cat.img}
                 alt={`category ${cat.id}`}
-                className="w-16 h-16 md:w-24 md:h-24 lg:w-36 lg:h-36 object-cover rounded-full mx-auto transform transition duration-300 ease-in-out hover:scale-105"
+                className="w-24 h-24 lg:w-36 lg:h-36 object-cover rounded-full mx-auto transform transition duration-300 ease-in-out hover:scale-105"
               />
               <p className="mt-3 text-blue-800 font-medium text-sm md:text-base lg:text-lg">
                 {cat.name}
@@ -158,82 +169,85 @@ export default function HomePage() {
         <div className="flex items-center justify-between mb-6">
           <h1>Recommendation</h1>
           {cards.length > 4 && (
-            <button
+            <Button
               onClick={() => setShowAll(!showAll)}
-              className="text-blue-800 text-sm font-semibold mr-8 hover:underline cursor-pointer"
+              className="text-primary bg-white border border-primary hover:bg-primary hover:text-white hover:border-primary text-sm cursor-pointer"
             >
               {showAll ? "Show Less" : "View All"}
-            </button>
+            </Button>
           )}
         </div>
 
         <div>
-          <div className="flex gap-5 overflow-x-auto md:hidden scrollbar-hide">
+          <div className="flex gap-5 overflow-x-auto md:hidden scrollbar-hide pb-2">
             {visibleCards.map((card) => (
-              <Card
+              <Link key={card.id} to={`/tours/${card.id}`}>
+                <Card
+                  key={card.id}
+                  className="min-w-[250px] rounded-xl shadow-lg shadow-gray-300 overflow-hidden hover:shadow-md hover:scale-101 transition duration-300 p-0"
+                >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="rounded-3xl w-full h-55 object-cover p-3"
+                  />
 
-                key={card.id}
-                className="min-w-[250px] rounded-xl shadow-lg shadow-gray-300 overflow-hidden hover:shadow-md hover:scale-101 transition duration-300 !p-0"
-              >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="rounded-3xl w-full h-55 object-cover p-3"
-                />
-
-                <CardContent className="px-4 pb-4 my-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-normal text-gray-600">
-                      {card.title}
-                    </h3>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-gray-600">
-                        {card.rating}
-                      </span>
+                  <CardContent className="px-4 pb-4 my-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-sm font-normal text-gray-600 line-clamp-1">
+                        {card.title}
+                      </h3>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="text-sm font-medium text-gray-600">
+                          {card.rating}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-1 text-gray-400 font-light">
-                    <MapPin className="w-4 h-4 text-blue-700" />
-                    <span className="text-sm">{card.location}</span>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="flex items-center gap-1 text-gray-400 font-light">
+                      <MapPin className="w-4 h-4 text-blue-700" />
+                      <span className="text-sm">{card.location}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
           <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
             {visibleCards.map((card) => (
-              <Card
-                key={card.id}
-                className="rounded-xl shadow-lg shadow-gray-300 overflow-hidden hover:shadow-md hover:scale-101 transition duration-300 !p-0"
-              >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="rounded-3xl w-full h-55 object-cover p-3"
-                />
+              <Link key={card.id} to={`/tours/${card.id}`}>
+                <Card
+                  key={card.id}
+                  className="rounded-xl shadow-lg shadow-gray-300 overflow-hidden hover:shadow-md hover:scale-101 transition duration-300 !p-0"
+                >
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="rounded-3xl w-full h-55 object-cover p-3"
+                  />
 
-                <CardContent className="px-4 pb-4 my-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-normal text-gray-600">
-                      {card.title}
-                    </h3>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-gray-600">
-                        {card.rating}
-                      </span>
+                  <CardContent className="px-4 pb-4 my-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-sm font-normal text-gray-600 line-clamp-1">
+                        {card.title}
+                      </h3>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="text-sm font-medium text-gray-600">
+                          {card.rating}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-1 text-gray-400 font-light">
-                    <MapPin className="w-4 h-4 text-blue-700" />
-                    <span className="text-sm">{card.location}</span>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="flex items-center gap-1 text-gray-400 font-light">
+                      <MapPin className="w-4 h-4 text-blue-700" />
+                      <span className="text-sm">{card.location}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -242,7 +256,7 @@ export default function HomePage() {
       <div className="text-xl font-normal mt-15 !w-full !max-w-full mb-9">
         <h1 className="mb-6">Available Tours</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full cursor-pointer">
           {cards2.map((card) => (
             <Card
               key={card.id}

@@ -88,22 +88,16 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "hotel-booking",
-        element: <HotelBookingPage />,
-      },
-      {
-        path: "hotel-booking/:id",
-        element: <RoomBookingPage />,
-      },
       { path: "checkout", element: <CheckoutPage /> },
       { path: "checkout/success", element: <SuccessPage /> },
       { path: "flights/search", element: <SearchFlightsPage /> },
       { path: "flights/list", element: <FlightsListsPage /> },
       { path: "flights/choose-seat", element: <ChooseSeatPage /> },
       { path: "flights/boarding-pass", element: <BoardingPassPage /> },
+
       { path: "hotel-booking", element: <HotelBookingPage /> },
       { path: "hotel-booking/:id", element: <RoomBookingPage /> },
+
       { path: "car-booking", element: <CarBookingPage /> },
     ],
   },

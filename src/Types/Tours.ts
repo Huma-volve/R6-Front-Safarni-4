@@ -6,4 +6,5 @@ export interface Tour {
   price: string;
   image: string;
   tour_id: number;
+  rating: number;
 }
