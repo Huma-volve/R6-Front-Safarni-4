@@ -14,7 +14,7 @@ type ProfileInfoType = {
 };
 
 export default function ProfileInfoPage() {
-  const user = useContext(UserContext);
+  const { user, handleGetProfile } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -26,16 +26,17 @@ export default function ProfileInfoPage() {
   });
 
   const handleSubmit = async (values: ProfileInfoType) => {
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
     try {
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
+      const token = localStorage.getItem("token");
       const response = await axios.post(`${BASE_URL}profile`, values, {
         headers: {
-          Authorization: `Bearer 35|8MTAhKb3ZWaVuD4lVpsxqGjrIcmobQ1ruzJlSJOcb49f2e51`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log(values);
       if (response.status === 200) {
         toast.success("Profile updated successfully");
+        handleGetProfile();
       }
     } catch (error) {
       console.log(error);
@@ -53,6 +54,8 @@ export default function ProfileInfoPage() {
     },
     validationSchema,
     onSubmit: handleSubmit,
+    validateOnChange: false,
+    validateOnBlur: true,
   });
 
   return <Info formik={formik} />;
