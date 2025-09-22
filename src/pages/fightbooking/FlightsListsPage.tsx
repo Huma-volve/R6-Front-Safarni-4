@@ -20,7 +20,7 @@ interface SearchValues {
   passengers: number;
 }
 
-const API_URL = `${import.meta.env.VITE_API_URL}/flights`;
+const API_URL = `${import.meta.env.VITE_BASE_URL}flights`;
 const TOKEN = localStorage.getItem("token") || import.meta.env.VITE_TOKEN;
 
 export default function FlightsList() {
